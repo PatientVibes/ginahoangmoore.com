@@ -75,6 +75,9 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
             query += ` AND year = (SELECT MAX(year) FROM snap_participation)`;
         }
 
+        // Only get annual Census data (month=0), not monthly state reports
+        query += ` AND month = 0`;
+
         query += ` ORDER BY state, county`;
 
         // Execute query

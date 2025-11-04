@@ -128,12 +128,13 @@ async function storeCensusData(db: D1Database, countyData: CountyData[]): Promis
     for (const data of countyData) {
         try {
             // Insert or update SNAP participation data
+            // month=0 indicates annual/yearly data (not monthly state reports)
             await db.prepare(`
                 INSERT INTO snap_participation
-                (county, state, year, households_receiving_snap, total_households, snap_rate,
+                (county, state, year, month, households_receiving_snap, total_households, snap_rate,
                  median_household_income, poverty_rate, data_source, updated_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
-                ON CONFLICT(county, state, year)
+                VALUES (?, ?, ?, 0, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP)
+                ON CONFLICT(county, state, year, month)
                 DO UPDATE SET
                     households_receiving_snap = excluded.households_receiving_snap,
                     total_households = excluded.total_households,
