@@ -14,11 +14,11 @@ database_id = "542916a2-a743-4932-8d73-643d02bf5110"
 # Environment variables (secrets set via Cloudflare dashboard)
 # CENSUS_API_KEY = "your-census-api-key-here" (set via: wrangler pages secret put CENSUS_API_KEY)
 
-# Cron Triggers for automated data collection
-[triggers]
-# Census data sync - Weekly on Sundays at 3 AM CT (9 AM UTC)
-# KC Library check - Daily at 2 AM CT (8 AM UTC)
-crons = ["0 9 * * 0", "0 8 * * *"]
+# NOTE: Cron Triggers must be configured via Cloudflare Dashboard for Pages projects
+# Go to: Workers & Pages > ginahoangmoore-com > Settings > Functions > Cron Triggers
+# Add these schedules:
+#   - Census sync: "0 9 * * 0" (Weekly Sundays 3 AM CT / 9 AM UTC)
+#   - KC Library: "0 8 * * *" (Daily 2 AM CT / 8 AM UTC)
 
 [env.production]
 name = "ginahoangmoore-production"
