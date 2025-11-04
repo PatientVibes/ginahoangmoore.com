@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kansas City Metro SNAP & Food Security Resource Platform - Find immediate assistance, explore data, and connect with community resources.">
+    <title>KC Metro Food Security Resources | GinaHoangMoore.com</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <!-- Crisis Alert Banner -->
+    <div id="crisis-banner" class="crisis-banner" role="alert" aria-live="polite">
+        <div class="container">
+            <span class="crisis-icon">⚠️</span>
+            <strong>SNAP Benefit Alert:</strong> November 2025 benefits delayed due to federal shutdown.
+            <a href="/crisis" class="crisis-link">Get immediate help →</a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav-brand">
+                    <h1>KC Food Security Hub</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#resources">Resources</a></li>
+                    <li><a href="#data">Data</a></li>
+                    <li><a href="#eligibility">Eligibility</a></li>
+                    <li><a href="#get-involved">Get Involved</a></li>
+                </ul>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h2 class="hero-title">Immediate Help is Available</h2>
+                <p class="hero-subtitle">Find food, utility, and financial assistance in the Kansas City metro area</p>
+
+                <!-- Quick Resource Finder -->
+                <div class="resource-finder">
+                    <form id="zip-search-form" class="search-form">
+                        <label for="zip-input" class="sr-only">Enter your ZIP code</label>
+                        <input
+                            type="text"
+                            id="zip-input"
+                            name="zip"
+                            placeholder="Enter your ZIP code (e.g., 64108)"
+                            pattern="[0-9]{5}"
+                            maxlength="5"
+                            required
+                            aria-label="ZIP code"
+                        >
+                        <button type="submit" class="btn btn-primary">Find Resources</button>
+                    </form>
+                    <div class="quick-links">
+                        <span>Or get help now:</span>
+                        <a href="tel:211" class="quick-link">📞 Call 211</a>
+                        <a href="tel:988" class="quick-link">🆘 Crisis Line 988</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Stats Dashboard -->
+    <section class="stats-section">
+        <div class="container">
+            <h3 class="section-title">Kansas City Metro Snapshot</h3>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">150,000+</div>
+                    <div class="stat-label">SNAP Recipients</div>
+                    <div class="stat-note">in the KC metro area</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">900+</div>
+                    <div class="stat-label">Pantries & Kitchens</div>
+                    <div class="stat-note">via Harvesters network</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$15.6M</div>
+                    <div class="stat-label">State Emergency Aid</div>
+                    <div class="stat-note">for food programs (MO)</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Crisis Support</div>
+                    <div class="stat-note">Call 988 anytime</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Get Help / Give Help CTAs -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-grid">
+                <!-- Get Help -->
+                <div class="cta-card cta-get-help">
+                    <h3>🆘 Need Help Now?</h3>
+                    <p>Find immediate assistance for food, utilities, housing, and more</p>
+                    <ul class="cta-list">
+                        <li>Food pantries & meal programs</li>
+                        <li>Utility bill assistance</li>
+                        <li>Emergency rental help</li>
+                        <li>Mental health support</li>
+                    </ul>
+                    <a href="/resources" class="btn btn-large btn-primary">Find Resources</a>
+                </div>
+
+                <!-- Give Help -->
+                <div class="cta-card cta-give-help">
+                    <h3>🤝 Want to Help?</h3>
+                    <p>Support KC families through donations, volunteering, and advocacy</p>
+                    <ul class="cta-list">
+                        <li>Donate to food banks (9× impact)</li>
+                        <li>Volunteer at distributions</li>
+                        <li>Advocate for funding</li>
+                        <li>Share resources</li>
+                    </ul>
+                    <a href="/get-involved" class="btn btn-large btn-secondary">Get Involved</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resource Categories -->
+    <section class="categories-section" id="resources">
+        <div class="container">
+            <h3 class="section-title">Browse by Need</h3>
+            <div class="categories-grid">
+                <a href="/resources/food" class="category-card">
+                    <span class="category-icon">🍎</span>
+                    <h4>Food Assistance</h4>
+                    <p>Pantries, meals, SNAP help</p>
+                </a>
+                <a href="/resources/utilities" class="category-card">
+                    <span class="category-icon">💡</span>
+                    <h4>Utility Help</h4>
+                    <p>Electricity, gas, water bills</p>
+                </a>
+                <a href="/resources/housing" class="category-card">
+                    <span class="category-icon">🏠</span>
+                    <h4>Housing Aid</h4>
+                    <p>Rent assistance, shelters</p>
+                </a>
+                <a href="/resources/mental-health" class="category-card">
+                    <span class="category-icon">💚</span>
+                    <h4>Mental Health</h4>
+                    <p>Crisis support, counseling</p>
+                </a>
+                <a href="/eligibility" class="category-card">
+                    <span class="category-icon">✅</span>
+                    <h4>Check Eligibility</h4>
+                    <p>See what programs you qualify for</p>
+                </a>
+                <a href="/data" class="category-card">
+                    <span class="category-icon">📊</span>
+                    <h4>Explore Data</h4>
+                    <p>Food insecurity trends, reports</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Preview -->
+    <section class="data-preview-section" id="data">
+        <div class="container">
+            <h3 class="section-title">Understanding Food Insecurity in KC</h3>
+            <div class="data-preview">
+                <div class="data-content">
+                    <h4>Evidence-Based Insights</h4>
+                    <p>Explore comprehensive data on SNAP participation, food insecurity rates, and poverty metrics across the Kansas City metro area. Our platform aggregates data from:</p>
+                    <ul>
+                        <li>USDA Food & Nutrition Service</li>
+                        <li>U.S. Census Bureau (ACS)</li>
+                        <li>Missouri & Kansas state agencies</li>
+                        <li>Feeding America & Harvesters</li>
+                        <li>Mid-America Regional Council (MARC)</li>
+                    </ul>
+                    <a href="/data" class="btn btn-outline">Explore Full Data →</a>
+                </div>
+                <div class="data-visual">
+                    <div class="placeholder-chart">
+                        <p>📈 Interactive charts and maps coming soon</p>
+                        <p class="placeholder-note">County-level SNAP participation, food insecurity trends, and demographic breakdowns</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>About This Site</h4>
+                    <p>A community resource providing verified, up-to-date information on food security and assistance programs in the Kansas City metro area.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/resources">Find Resources</a></li>
+                        <li><a href="/data">Explore Data</a></li>
+                        <li><a href="/eligibility">Check Eligibility</a></li>
+                        <li><a href="/crisis">Crisis Information</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Emergency Contacts</h4>
+                    <ul>
+                        <li>📞 United Way 211: <a href="tel:211">Dial 211</a></li>
+                        <li>🆘 Crisis Line: <a href="tel:988">Dial 988</a></li>
+                        <li>🍎 Harvesters: <a href="tel:8776539519">877-653-9519</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Stay Informed</h4>
+                    <ul>
+                        <li><a href="/about">About & Methodology</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="https://github.com/PatientVibes/ginahoangmoore.com" target="_blank" rel="noopener">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GinaHoangMoore.com | Data updated: <span id="last-updated">November 4, 2025</span></p>
+                <p class="disclaimer">Information provided for educational and informational purposes. Always verify with official agencies.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
