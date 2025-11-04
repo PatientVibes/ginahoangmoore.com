@@ -1,0 +1,27 @@
+version: 2
+updates:
+  # GitHub Actions updates
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "dependencies"
+      - "github-actions"
+      - "automated"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
+
+  # npm dependencies (when package.json is added)
+  # - package-ecosystem: "npm"
+  #   directory: "/"
+  #   schedule:
+  #     interval: "weekly"
+  #     day: "monday"
+  #   open-pull-requests-limit: 5
+  #   labels:
+  #     - "dependencies"
+  #     - "npm"
+  #     - "automated"
