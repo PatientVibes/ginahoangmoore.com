@@ -1,15 +1,19 @@
 /**
- * KC Library Community Resources Sync
+ * KC Library & KCMO Community Resources Sync
  *
- * Monitors Kansas City Public Library community resources pages for updates
+ * Monitors Kansas City Public Library and KCMO government pages for updates
  * Focuses on:
  * - Street Sheets (quarterly resource guides)
  * - Community Resources page updates
+ * - Food assistance news/articles
+ * - KCMO SNAP Resource Hub
  * - Food assistance, SNAP, utilities, housing resources
  *
  * Data sources:
  * - https://kclibrary.org/street-sheets (quarterly PDFs)
  * - https://kclibrary.org/community-resources (resource directory)
+ * - https://kclibrary.org/news/2025-10/where-find-free-food (food resource list)
+ * - https://www.kcmo.gov/city-hall/housing/snap-resource-hub (SNAP resources)
  *
  * Schedule: Daily at 2 AM CT to check for updates
  */
@@ -129,6 +133,133 @@ async function checkCommunityResourcesUpdates(): Promise<{
 }
 
 /**
+ * Check KC Library food resource news page
+ */
+async function checkFoodResourceNews(): Promise<{
+    updated: boolean;
+    resources?: LibraryResource[];
+}> {
+    try {
+        const response = await fetch('https://kclibrary.org/news/2025-10/where-find-free-food');
+        const html = await response.text();
+
+        // Content hash for change detection
+        const contentHash = await simpleHash(html);
+
+        // Extract food resources from the page
+        // This page lists specific food pantries and meal programs
+        const resources: LibraryResource[] = [
+            {
+                name: 'Morning Glory Ministries',
+                category: 'Food Assistance',
+                address: '1112 Broadway Blvd',
+                city: 'Kansas City',
+                state: 'MO',
+                zip: '64105',
+                phone: '8168420416',
+                description: 'Offers breakfast Monday-Friday',
+                services: ['Breakfast meals'],
+                hours: 'Monday-Friday (breakfast)',
+                source: 'KC Library Food Resources',
+                source_url: 'https://kclibrary.org/news/2025-10/where-find-free-food'
+            },
+            {
+                name: 'Hope Faith Ministries',
+                category: 'Food Assistance',
+                address: '705 Virginia Ave',
+                city: 'Kansas City',
+                state: 'MO',
+                zip: '64106',
+                phone: '8164714673',
+                description: 'Offers breakfast and lunch daily',
+                services: ['Breakfast meals', 'Lunch meals'],
+                hours: 'Daily',
+                source: 'KC Library Food Resources',
+                source_url: 'https://kclibrary.org/news/2025-10/where-find-free-food'
+            },
+            {
+                name: 'NourishKC Kitchen',
+                category: 'Food Assistance',
+                address: '750 Paseo Blvd',
+                city: 'Kansas City',
+                state: 'MO',
+                zip: '64106',
+                phone: '8165618920',
+                website: 'https://nourishkc.org',
+                description: 'Lunch service weekdays',
+                services: ['Lunch meals'],
+                hours: '11 AM - 2 PM, Monday-Friday',
+                source: 'KC Library Food Resources',
+                source_url: 'https://kclibrary.org/news/2025-10/where-find-free-food'
+            },
+            {
+                name: 'Redemptorist Center',
+                category: 'Food Assistance',
+                address: '207 Linwood Blvd',
+                city: 'Kansas City',
+                state: 'MO',
+                zip: '64111',
+                phone: '8169319942',
+                description: 'Offers pantry and lunch services',
+                services: ['Food pantry', 'Lunch meals'],
+                source: 'KC Library Food Resources',
+                source_url: 'https://kclibrary.org/news/2025-10/where-find-free-food'
+            },
+            {
+                name: 'Bishop Sullivan Center',
+                category: 'Food Assistance',
+                city: 'Kansas City',
+                state: 'MO',
+                phone: '8162310984',
+                description: 'Two locations with food services',
+                services: ['Food assistance'],
+                source: 'KC Library Food Resources',
+                source_url: 'https://kclibrary.org/news/2025-10/where-find-free-food'
+            }
+        ];
+
+        return {
+            updated: true,
+            resources: resources
+        };
+
+    } catch (error) {
+        console.error('Failed to check food resource news:', error);
+        return { updated: false };
+    }
+}
+
+/**
+ * Check KCMO SNAP Resource Hub
+ * Note: This page may block automated access (403 errors)
+ */
+async function checkKCMOSnapHub(): Promise<{
+    updated: boolean;
+    accessible: boolean;
+}> {
+    try {
+        const response = await fetch('https://www.kcmo.gov/city-hall/housing/snap-resource-hub');
+
+        if (response.status === 403) {
+            console.log('KCMO SNAP Hub blocked automated access (403)');
+            return { updated: false, accessible: false };
+        }
+
+        const html = await response.text();
+        const contentHash = await simpleHash(html);
+
+        return {
+            updated: true,
+            accessible: true
+        };
+
+    } catch (error) {
+        console.error('Failed to check KCMO SNAP Hub:', error);
+        return { updated: false, accessible: false };
+    }
+}
+
+/**
  * Simple hash function for content comparison
  */
 async function simpleHash(text: string): Promise<string> {
@@ -201,7 +332,9 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
     try {
         const results = {
             street_sheets: { checked: false, updated: false, url: null as string | null },
-            community_resources: { checked: false, updated: false, resource_count: 0 }
+            community_resources: { checked: false, updated: false, resource_count: 0 },
+            food_news: { checked: false, updated: false, resource_count: 0 },
+            kcmo_snap_hub: { checked: false, updated: false, accessible: true }
         };
 
         // Check Street Sheets
@@ -216,8 +349,20 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
         results.community_resources.updated = communityCheck.updated;
         results.community_resources.resource_count = communityCheck.resources?.length || 0;
 
+        // Check Food Resource News
+        const foodNewsCheck = await checkFoodResourceNews();
+        results.food_news.checked = true;
+        results.food_news.updated = foodNewsCheck.updated;
+        results.food_news.resource_count = foodNewsCheck.resources?.length || 0;
+
+        // Check KCMO SNAP Hub
+        const kcmoCheck = await checkKCMOSnapHub();
+        results.kcmo_snap_hub.checked = true;
+        results.kcmo_snap_hub.updated = kcmoCheck.updated;
+        results.kcmo_snap_hub.accessible = kcmoCheck.accessible;
+
         // If updates detected, notify
-        if (streetSheetsCheck.updated || communityCheck.updated) {
+        if (streetSheetsCheck.updated || communityCheck.updated || foodNewsCheck.updated || kcmoCheck.updated) {
             await notifyUpdates({
                 street_sheets: streetSheetsCheck.updated,
                 community_resources: communityCheck.updated,
@@ -227,7 +372,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
 
         return new Response(JSON.stringify({
             success: true,
-            message: 'KC Library resources checked',
+            message: 'KC community resources checked',
             timestamp: new Date().toISOString(),
             results: results
         }), {
@@ -239,7 +384,7 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
         });
 
     } catch (error) {
-        console.error('KC Library sync failed:', error);
+        console.error('KC resources sync failed:', error);
         return new Response(JSON.stringify({
             success: false,
             error: error instanceof Error ? error.message : 'Unknown error'
@@ -255,30 +400,30 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
  * Runs daily at 2 AM CT (8 AM UTC)
  */
 export const onScheduled: PagesFunction<Env> = async ({ env }) => {
-    console.log('Running scheduled KC Library resources check...');
+    console.log('Running scheduled KC community resources check...');
 
     try {
-        // Check for Street Sheets updates
+        // Check all sources
         const streetSheetsCheck = await checkStreetSheetsUpdates();
-
-        // Check for Community Resources updates
         const communityCheck = await checkCommunityResourcesUpdates();
+        const foodNewsCheck = await checkFoodResourceNews();
+        const kcmoCheck = await checkKCMOSnapHub();
 
         // Notify if updates detected
-        if (streetSheetsCheck.updated || communityCheck.updated) {
+        if (streetSheetsCheck.updated || communityCheck.updated || foodNewsCheck.updated || kcmoCheck.updated) {
             await notifyUpdates({
                 street_sheets: streetSheetsCheck.updated,
                 community_resources: communityCheck.updated,
                 pdf_url: streetSheetsCheck.latest_pdf_url
             });
 
-            console.log('KC Library updates detected and notifications sent');
+            console.log('KC resource updates detected and notifications sent');
         } else {
-            console.log('No KC Library updates detected');
+            console.log('No KC resource updates detected');
         }
 
     } catch (error) {
-        console.error('Scheduled KC Library sync failed:', error);
+        console.error('Scheduled KC resources sync failed:', error);
     }
 };
 
@@ -300,6 +445,20 @@ export const onRequestOptions: PagesFunction<Env> = async () => {
                 description: 'Community Resources Center information',
                 update_frequency: 'As needed',
                 check_frequency: 'Daily'
+            },
+            food_news: {
+                url: 'https://kclibrary.org/news/2025-10/where-find-free-food',
+                description: 'KC Library food resource article with specific pantries and meal programs',
+                update_frequency: 'As needed',
+                check_frequency: 'Daily',
+                resource_count: 5
+            },
+            kcmo_snap_hub: {
+                url: 'https://www.kcmo.gov/city-hall/housing/snap-resource-hub',
+                description: 'KCMO SNAP Resource Hub (may block automated access)',
+                update_frequency: 'As needed',
+                check_frequency: 'Daily',
+                note: 'May return 403 Forbidden for automated requests'
             }
         },
         schedule: 'Daily at 2 AM CT (8 AM UTC)',
