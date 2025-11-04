@@ -171,8 +171,43 @@
                 <!-- Resources will be loaded here via JavaScript -->
             </div>
 
-            <div id="error-container" style="display: none; text-align: center; padding: var(--spacing-2xl);">
-                <p style="color: var(--color-danger); font-weight: 600;">Failed to load resources. Please try again later.</p>
+            <div id="error-container" style="display: none;">
+                <div class="alert alert-info" style="margin-bottom: var(--spacing-xl);">
+                    <div class="alert-icon">ℹ️</div>
+                    <div class="alert-content">
+                        <div class="alert-title">Resource Directory Coming Soon</div>
+                        <div class="alert-message">We're building a comprehensive database of food assistance resources. For immediate help, use the options below.</div>
+                    </div>
+                </div>
+
+                <!-- Temporary Static Resources -->
+                <div class="resource-list">
+                    <div class="card">
+                        <h3 style="margin-bottom: var(--spacing-md);">📞 Call 211 - United Way Helpline</h3>
+                        <p style="margin-bottom: var(--spacing-md);">Connect with food pantries, meal programs, and SNAP assistance in your area</p>
+                        <a href="tel:211" class="btn btn-danger btn-full">Call 211 Now</a>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: var(--spacing-md);">🍎 Harvesters Food Network</h3>
+                        <p style="margin-bottom: var(--spacing-md);">Find food pantries and mobile distributions across the KC metro area</p>
+                        <p><strong>Phone:</strong> <a href="tel:8776539519">(877) 653-9519</a></p>
+                        <p><strong>Website:</strong> <a href="https://www.harvesters.org" target="_blank" rel="noopener">harvesters.org</a></p>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: var(--spacing-md);">🏛️ Apply for SNAP Benefits</h3>
+                        <p style="margin-bottom: var(--spacing-md);"><strong>Missouri:</strong> <a href="https://mydss.mo.gov" target="_blank" rel="noopener">mydss.mo.gov</a> or call <a href="tel:8553734636">(855) 373-4636</a></p>
+                        <p><strong>Kansas:</strong> <a href="https://www.dcf.ks.gov" target="_blank" rel="noopener">dcf.ks.gov</a> or call <a href="tel:8883694777">(888) 369-4777</a></p>
+                    </div>
+
+                    <div class="card">
+                        <h3 style="margin-bottom: var(--spacing-md);">📋 More Resources</h3>
+                        <p style="margin-bottom: var(--spacing-md);">Additional assistance programs available</p>
+                        <a href="/resources" class="btn btn-outline">View All Resources</a>
+                        <a href="/faq" class="btn btn-outline" style="margin-left: var(--spacing-sm);">Read FAQ</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -222,12 +257,20 @@
     <script>
         // Load food assistance resources
         async function loadResources() {
+            // Set timeout to show fallback content after 3 seconds
+            const timeoutId = setTimeout(() => {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error-container').style.display = 'block';
+            }, 3000);
+
             try {
                 const response = await fetch('/api/resources?category=food');
                 const { success, data } = await response.json();
 
-                if (!success || !data) {
-                    throw new Error('Failed to load resources');
+                clearTimeout(timeoutId);
+
+                if (!success || !data || data.length === 0) {
+                    throw new Error('No resources available');
                 }
 
                 document.getElementById('loading').style.display = 'none';

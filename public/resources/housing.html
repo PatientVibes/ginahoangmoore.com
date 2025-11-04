@@ -56,16 +56,27 @@
     <!-- Resources Section -->
     <section class="resources-section">
         <div class="container">
-            <div id="loading" class="loading">
-                <p>Loading housing resources...</p>
-            </div>
+            <!-- Fallback Content -->
+            <div class="resource-list">
+                <div class="card">
+                    <h3 style="margin-bottom: var(--spacing-md);">📞 Call 211 - Immediate Housing Help</h3>
+                    <p style="margin-bottom: var(--spacing-md);">United Way 211 connects you with emergency shelters, rent assistance, and eviction prevention programs in your area</p>
+                    <a href="tel:211" class="btn btn-danger btn-full">Call 211 Now</a>
+                </div>
 
-            <div id="resources-container" class="resource-list" style="display: none;">
-                <!-- Resources will be loaded here via JavaScript -->
-            </div>
+                <div class="card">
+                    <h3 style="margin-bottom: var(--spacing-md);">⚖️ Legal Aid of Western Missouri</h3>
+                    <p style="margin-bottom: var(--spacing-md);">Free legal help for eviction cases and housing issues</p>
+                    <p><strong>Phone:</strong> <a href="tel:8164744665">(816) 474-6750</a></p>
+                    <p style="margin-top: var(--spacing-sm);"><strong>Kansas City Eviction Help:</strong> <a href="https://www.kcmo.gov/city-hall/housing" target="_blank" rel="noopener">kcmo.gov/housing</a></p>
+                </div>
 
-            <div id="error-container" class="error-message" style="display: none;">
-                <p>Failed to load resources. Please call <a href="tel:211">211</a> for assistance or try again later.</p>
+                <div class="card">
+                    <h3 style="margin-bottom: var(--spacing-md);">💡 Additional Resources</h3>
+                    <p style="margin-bottom: var(--spacing-md);">More assistance programs available</p>
+                    <a href="/resources" class="btn btn-outline">View All Resources</a>
+                    <a href="/faq" class="btn btn-outline" style="margin-left: var(--spacing-sm);">Read FAQ</a>
+                </div>
             </div>
         </div>
     </section>
