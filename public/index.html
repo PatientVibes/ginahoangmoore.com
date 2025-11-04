@@ -25,9 +25,9 @@
                     <h1>KC Food Security Hub</h1>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="#resources">Resources</a></li>
-                    <li><a href="#data">Data</a></li>
-                    <li><a href="#eligibility">Eligibility</a></li>
+                    <li><a href="/resources">Resources</a></li>
+                    <li><a href="/data">Data</a></li>
+                    <li><a href="/faq">FAQ</a></li>
                     <li><a href="#get-involved">Get Involved</a></li>
                 </ul>
                 <button class="nav-toggle" aria-label="Toggle navigation">
@@ -43,30 +43,60 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h2 class="hero-title">Immediate Help is Available</h2>
-                <p class="hero-subtitle">Find food, utility, and financial assistance in the Kansas City metro area</p>
+                <h2 class="hero-title">Need Help? We're Here for You.</h2>
+                <p class="hero-subtitle">Find food, housing, utility, and support services in Kansas City</p>
 
-                <!-- Quick Resource Finder -->
-                <div class="resource-finder">
+                <!-- Help Grid - Based on UX Research -->
+                <div class="help-grid">
+                    <a href="/resources/food" class="help-button help-button-food">
+                        <span class="help-icon">🍔</span>
+                        <h3>Need Food?</h3>
+                        <p>Pantries, meals, SNAP</p>
+                    </a>
+                    <a href="/resources/housing" class="help-button help-button-housing">
+                        <span class="help-icon">🏠</span>
+                        <h3>Need Housing?</h3>
+                        <p>Rent help, shelters</p>
+                    </a>
+                    <a href="/resources/utilities" class="help-button help-button-utilities">
+                        <span class="help-icon">💡</span>
+                        <h3>Need Utility Help?</h3>
+                        <p>Electric, gas, water</p>
+                    </a>
+                    <a href="/resources/mental-health" class="help-button help-button-mental">
+                        <span class="help-icon">🧠</span>
+                        <h3>Need Support?</h3>
+                        <p>Mental health, crisis</p>
+                    </a>
+                    <a href="/resources/financial" class="help-button help-button-financial">
+                        <span class="help-icon">💰</span>
+                        <h3>Need Cash Help?</h3>
+                        <p>TANF, financial aid</p>
+                    </a>
+                    <a href="tel:211" class="help-button help-button-urgent">
+                        <span class="help-icon">📱</span>
+                        <h3>Call 211 Now</h3>
+                        <p>Talk to an expert</p>
+                    </a>
+                </div>
+
+                <!-- ZIP Search (Secondary) -->
+                <div class="resource-finder-secondary">
+                    <p class="search-prompt">Or search by your location:</p>
                     <form id="zip-search-form" class="search-form">
                         <label for="zip-input" class="sr-only">Enter your ZIP code</label>
                         <input
                             type="text"
                             id="zip-input"
                             name="zip"
-                            placeholder="Enter your ZIP code (e.g., 64108)"
+                            placeholder="Enter ZIP code (e.g., 64108)"
                             pattern="[0-9]{5}"
                             maxlength="5"
                             required
                             aria-label="ZIP code"
                         >
-                        <button type="submit" class="btn btn-primary">Find Resources</button>
+                        <button type="submit" class="btn btn-primary">Search</button>
                     </form>
-                    <div class="quick-links">
-                        <span>Or get help now:</span>
-                        <a href="tel:211" class="quick-link">📞 Call 211</a>
-                        <a href="tel:988" class="quick-link">🆘 Crisis Line 988</a>
-                    </div>
                 </div>
             </div>
         </div>

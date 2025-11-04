@@ -4,32 +4,62 @@
 
 /* ============================================
    CSS Variables & Design Tokens
+   Kansas City Flag Colors + WCAG AA Accessibility
    ============================================ */
 :root {
-    /* Colors */
-    --color-primary: #2563eb;
-    --color-primary-dark: #1e40af;
-    --color-secondary: #10b981;
-    --color-secondary-dark: #059669;
-    --color-danger: #ef4444;
-    --color-warning: #f59e0b;
-    --color-info: #3b82f6;
+    /* Primary Colors - KC Flag */
+    --kc-blue: #0283C0;
+    --kc-blue-dark: #01699B;
+    --kc-red: #EF483F;
+    --kc-red-dark: #D32F2F;
+    --kc-gold: #F9A825;
+    --kc-gold-dark: #F57F17;
 
-    /* Grayscale */
-    --color-gray-50: #f9fafb;
-    --color-gray-100: #f3f4f6;
-    --color-gray-200: #e5e7eb;
-    --color-gray-300: #d1d5db;
-    --color-gray-700: #374151;
-    --color-gray-800: #1f2937;
-    --color-gray-900: #111827;
+    /* Category Colors - Semantic + Accessible */
+    --color-food: #388E3C;
+    --color-housing: #E64A19;
+    --color-utilities: #E65100;
+    --color-mental-health: #7B1FA2;
+    --color-financial: #00796B;
+    --color-healthcare: #C62828;
+
+    /* Neutrals */
+    --text-primary: #212121;
+    --text-secondary: #757575;
+    --bg-light: #F5F5F5;
+    --bg-medium: #E0E0E0;
+    --white: #FFFFFF;
+
+    /* Status Colors */
+    --success: #2E7D32;
+    --warning: #E65100;
+    --error: #C62828;
+    --info: #1565C0;
+
+    /* Legacy Mappings (for compatibility) */
+    --color-primary: var(--kc-blue-dark);
+    --color-primary-dark: #014D73;
+    --color-secondary: var(--color-food);
+    --color-secondary-dark: #2E7D32;
+    --color-danger: var(--kc-red-dark);
+    --color-warning: var(--warning);
+    --color-info: var(--info);
+
+    /* Grayscale (updated for consistency) */
+    --color-gray-50: var(--bg-light);
+    --color-gray-100: #EEEEEE;
+    --color-gray-200: var(--bg-medium);
+    --color-gray-300: #BDBDBD;
+    --color-gray-700: var(--text-secondary);
+    --color-gray-800: #424242;
+    --color-gray-900: var(--text-primary);
 
     /* Semantic Colors */
-    --color-text: var(--color-gray-900);
-    --color-text-light: var(--color-gray-700);
-    --color-bg: #ffffff;
-    --color-bg-alt: var(--color-gray-50);
-    --color-border: var(--color-gray-200);
+    --color-text: var(--text-primary);
+    --color-text-light: var(--text-secondary);
+    --color-bg: var(--white);
+    --color-bg-alt: var(--bg-light);
+    --color-border: var(--bg-medium);
 
     /* Typography */
     --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
@@ -259,6 +289,100 @@ ul, ol {
     font-size: 1.25rem;
     margin-bottom: var(--spacing-xl);
     opacity: 0.95;
+}
+
+/* Help Grid - UX Research Based Design */
+.help-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-xl);
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.help-button {
+    background: white;
+    color: var(--text-primary);
+    padding: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    text-align: center;
+    transition: all var(--transition-base);
+    border: 3px solid transparent;
+    box-shadow: var(--box-shadow);
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.help-button:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--box-shadow-lg);
+    text-decoration: none;
+}
+
+.help-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: var(--spacing-sm);
+}
+
+.help-button h3 {
+    font-size: 1.125rem;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 700;
+}
+
+.help-button p {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+/* Category-specific colors */
+.help-button-food { border-color: var(--color-food); }
+.help-button-food:hover { background: var(--color-food); color: white; }
+.help-button-food:hover p { color: white; opacity: 0.9; }
+
+.help-button-housing { border-color: var(--color-housing); }
+.help-button-housing:hover { background: var(--color-housing); color: white; }
+.help-button-housing:hover p { color: white; opacity: 0.9; }
+
+.help-button-utilities { border-color: var(--color-utilities); }
+.help-button-utilities:hover { background: var(--color-utilities); color: white; }
+.help-button-utilities:hover p { color: white; opacity: 0.9; }
+
+.help-button-mental { border-color: var(--color-mental-health); }
+.help-button-mental:hover { background: var(--color-mental-health); color: white; }
+.help-button-mental:hover p { color: white; opacity: 0.9; }
+
+.help-button-financial { border-color: var(--color-financial); }
+.help-button-financial:hover { background: var(--color-financial); color: white; }
+.help-button-financial:hover p { color: white; opacity: 0.9; }
+
+.help-button-urgent {
+    border-color: var(--kc-red-dark);
+    background: var(--kc-red-dark);
+    color: white;
+}
+.help-button-urgent:hover {
+    background: #B71C1C;
+    border-color: #B71C1C;
+}
+.help-button-urgent p { color: white; opacity: 0.95; }
+
+/* Secondary resource finder */
+.resource-finder-secondary {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-prompt {
+    margin-bottom: var(--spacing-sm);
+    opacity: 0.9;
 }
 
 .resource-finder {
@@ -603,6 +727,129 @@ ul, ol {
     margin-top: var(--spacing-sm);
     color: var(--color-gray-300);
     font-style: italic;
+}
+
+/* ============================================
+   FAQ Page Styles
+   ============================================ */
+.page-hero {
+    background: linear-gradient(135deg, var(--kc-blue) 0%, var(--kc-blue-dark) 100%);
+    color: white;
+    padding: var(--spacing-2xl) 0;
+    text-align: center;
+}
+
+.page-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.page-subtitle {
+    font-size: 1.25rem;
+    opacity: 0.95;
+    margin: 0;
+}
+
+.quick-help-section {
+    padding: var(--spacing-lg) 0;
+    background-color: var(--kc-gold-dark);
+}
+
+.quick-help-banner {
+    background: rgba(255, 255, 255, 0.95);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+}
+
+.quick-help-banner p {
+    margin: 0;
+    font-size: 1.125rem;
+}
+
+.quick-help-banner a {
+    font-weight: 700;
+    color: var(--kc-red-dark);
+}
+
+.faq-section {
+    padding: var(--spacing-2xl) 0;
+}
+
+.faq-category {
+    margin-bottom: var(--spacing-2xl);
+}
+
+.faq-category > h2 {
+    font-size: 1.75rem;
+    color: var(--kc-blue-dark);
+    border-bottom: 3px solid var(--kc-blue-dark);
+    padding-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+}
+
+.faq-item {
+    background: white;
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--kc-blue);
+    box-shadow: var(--box-shadow);
+}
+
+.faq-item h3 {
+    font-size: 1.25rem;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-md);
+}
+
+.faq-item p {
+    margin-bottom: var(--spacing-sm);
+    line-height: 1.7;
+}
+
+.faq-item ul {
+    margin-bottom: var(--spacing-md);
+}
+
+.faq-item li {
+    margin-bottom: var(--spacing-xs);
+}
+
+.faq-item strong {
+    color: var(--kc-blue-dark);
+}
+
+.cta-banner {
+    background: var(--bg-light);
+    padding: var(--spacing-2xl) 0;
+    text-align: center;
+}
+
+.cta-banner h2 {
+    font-size: 2rem;
+    margin-bottom: var(--spacing-md);
+}
+
+.cta-banner p {
+    font-size: 1.125rem;
+    max-width: 600px;
+    margin: 0 auto var(--spacing-xl);
+    color: var(--text-secondary);
+}
+
+.cta-buttons {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.nav-menu a.active {
+    background-color: var(--bg-light);
+    color: var(--kc-blue-dark);
+    font-weight: 600;
 }
 
 /* ============================================
