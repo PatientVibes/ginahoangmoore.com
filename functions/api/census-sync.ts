@@ -48,7 +48,7 @@ const KC_METRO_COUNTIES = [
  * Fetch SNAP participation data from Census ACS API
  */
 async function fetchCensusSNAPData(
-    censusApiKey: string,
+    censusApiKey: string | undefined,
     year: number = 2022
 ): Promise<CountyData[]> {
     const results: CountyData[] = [];
@@ -68,11 +68,16 @@ async function fetchCensusSNAPData(
     ].join(',');
 
     for (const county of KC_METRO_COUNTIES) {
-        const url = `https://api.census.gov/data/${year}/acs/acs5/subject?` +
+        // Build URL with optional API key
+        let url = `https://api.census.gov/data/${year}/acs/acs5/subject?` +
             `get=NAME,${variables}&` +
             `for=county:${county.county_fips}&` +
-            `in=state:${county.state_fips}&` +
-            `key=${censusApiKey}`;
+            `in=state:${county.state_fips}`;
+
+        // Add key parameter if available
+        if (censusApiKey) {
+            url += `&key=${censusApiKey}`;
+        }
 
         try {
             const response = await fetch(url);
@@ -160,16 +165,12 @@ async function storeCensusData(db: D1Database, countyData: CountyData[]): Promis
 export const onRequestGet: PagesFunction<Env> = async (context) => {
     const { env } = context;
 
-    // Check for Census API key
+    // Census API key is optional (lower rate limits without key)
     const censusApiKey = env.CENSUS_API_KEY;
-    if (!censusApiKey) {
-        return new Response(JSON.stringify({
-            success: false,
-            error: 'Census API key not configured'
-        }), {
-            status: 500,
-            headers: { 'Content-Type': 'application/json' }
-        });
+    if (censusApiKey) {
+        console.log('Using Census API key');
+    } else {
+        console.log('Operating without Census API key (rate limited to 500 queries/day)');
     }
 
     try {
@@ -222,10 +223,9 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
  */
 export const onScheduled: PagesFunction<Env> = async ({ env }) => {
     const censusApiKey = env.CENSUS_API_KEY;
-    if (!censusApiKey) {
-        console.error('Census API key not configured');
-        return;
-    }
+    console.log(censusApiKey
+        ? 'Running scheduled sync with API key'
+        : 'Running scheduled sync without API key (rate limited)');
 
     try {
         console.log('Running scheduled Census data sync...');
