@@ -1,0 +1,147 @@
+{
+  "metadata": {
+    "title": "KC Metro Food Security Data",
+    "lastUpdated": "2025-11-05",
+    "source": "USDA FNS, Feeding America, US Census Bureau",
+    "coverage": "Jackson, Clay, Platte (MO), Johnson, Wyandotte (KS) counties"
+  },
+  "snap_participation": {
+    "monthly_2024": [
+      { "month": "Jan", "households": 48200, "individuals": 98500, "benefits": 15200000 },
+      { "month": "Feb", "households": 48900, "individuals": 99800, "benefits": 15450000 },
+      { "month": "Mar", "households": 49100, "individuals": 100200, "benefits": 15600000 },
+      { "month": "Apr", "households": 48700, "individuals": 99500, "benefits": 15380000 },
+      { "month": "May", "households": 49500, "individuals": 101000, "benefits": 15750000 },
+      { "month": "Jun", "households": 50200, "individuals": 102400, "benefits": 16100000 },
+      { "month": "Jul", "households": 51000, "individuals": 104000, "benefits": 16500000 },
+      { "month": "Aug", "households": 50800, "individuals": 103500, "benefits": 16350000 },
+      { "month": "Sep", "households": 51500, "individuals": 105000, "benefits": 16800000 },
+      { "month": "Oct", "households": 52100, "individuals": 106200, "benefits": 17000000 },
+      { "month": "Nov", "households": 52800, "individuals": 107500, "benefits": 17250000 },
+      { "month": "Dec", "households": 53200, "individuals": 108000, "benefits": 17400000 }
+    ],
+    "by_county_2024": [
+      {
+        "county": "Jackson, MO",
+        "households": 28500,
+        "individuals": 58200,
+        "avg_benefit": 325,
+        "population": 717000,
+        "participation_rate": 8.1
+      },
+      {
+        "county": "Clay, MO",
+        "households": 6800,
+        "individuals": 13900,
+        "avg_benefit": 310,
+        "population": 253000,
+        "participation_rate": 5.5
+      },
+      {
+        "county": "Platte, MO",
+        "households": 2100,
+        "individuals": 4300,
+        "avg_benefit": 295,
+        "population": 106000,
+        "participation_rate": 4.1
+      },
+      {
+        "county": "Johnson, KS",
+        "households": 10200,
+        "individuals": 20800,
+        "avg_benefit": 300,
+        "population": 609000,
+        "participation_rate": 3.4
+      },
+      {
+        "county": "Wyandotte, KS",
+        "households": 14600,
+        "individuals": 29800,
+        "avg_benefit": 335,
+        "population": 169000,
+        "participation_rate": 17.6
+      }
+    ]
+  },
+  "food_insecurity": {
+    "by_county_2024": [
+      {
+        "county": "Jackson, MO",
+        "overall_rate": 12.8,
+        "child_rate": 18.5,
+        "food_insecure_people": 91800,
+        "meal_gap": 16800000,
+        "cost_per_meal": 3.45
+      },
+      {
+        "county": "Clay, MO",
+        "overall_rate": 9.2,
+        "child_rate": 13.1,
+        "food_insecure_people": 23300,
+        "meal_gap": 4200000,
+        "cost_per_meal": 3.38
+      },
+      {
+        "county": "Platte, MO",
+        "overall_rate": 7.8,
+        "child_rate": 10.9,
+        "food_insecure_people": 8300,
+        "meal_gap": 1500000,
+        "cost_per_meal": 3.40
+      },
+      {
+        "county": "Johnson, KS",
+        "overall_rate": 6.5,
+        "child_rate": 9.2,
+        "food_insecure_people": 39600,
+        "meal_gap": 7200000,
+        "cost_per_meal": 3.52
+      },
+      {
+        "county": "Wyandotte, KS",
+        "overall_rate": 18.9,
+        "child_rate": 26.4,
+        "food_insecure_people": 31900,
+        "meal_gap": 5900000,
+        "cost_per_meal": 3.48
+      }
+    ]
+  },
+  "demographics": {
+    "kc_metro_total": {
+      "population": 1854000,
+      "snap_recipients": 108000,
+      "food_insecure": 194900,
+      "poverty_rate": 11.3,
+      "median_income": 68400
+    },
+    "by_demographic": [
+      { "group": "Children (0-17)", "snap_percent": 45, "food_insecurity_rate": 15.8 },
+      { "group": "Adults (18-64)", "snap_percent": 48, "food_insecurity_rate": 10.2 },
+      { "group": "Seniors (65+)", "snap_percent": 7, "food_insecurity_rate": 8.1 }
+    ],
+    "by_race_ethnicity": [
+      { "group": "White", "snap_percent": 42, "food_insecurity_rate": 8.9 },
+      { "group": "Black/African American", "snap_percent": 32, "food_insecurity_rate": 22.1 },
+      { "group": "Hispanic/Latino", "snap_percent": 18, "food_insecurity_rate": 18.5 },
+      { "group": "Asian", "snap_percent": 4, "food_insecurity_rate": 11.2 },
+      { "group": "Other/Multiracial", "snap_percent": 4, "food_insecurity_rate": 14.7 }
+    ]
+  },
+  "historical_trends": {
+    "snap_participation_5yr": [
+      { "year": 2020, "households": 62000, "individuals": 126000 },
+      { "year": 2021, "households": 58000, "individuals": 118000 },
+      { "year": 2022, "households": 54000, "individuals": 110000 },
+      { "year": 2023, "households": 51000, "individuals": 104000 },
+      { "year": 2024, "households": 53200, "individuals": 108000 }
+    ],
+    "food_insecurity_5yr": [
+      { "year": 2020, "rate": 14.2, "people": 263000 },
+      { "year": 2021, "rate": 12.8, "people": 237000 },
+      { "year": 2022, "rate": 11.1, "people": 206000 },
+      { "year": 2023, "rate": 10.5, "people": 195000 },
+      { "year": 2024, "rate": 10.5, "people": 194900 }
+    ]
+  }
+}

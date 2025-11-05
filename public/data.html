@@ -38,6 +38,8 @@
     <link rel="stylesheet" href="/css/tokens.css">
     <link rel="stylesheet" href="/css/components.css">
     <link rel="stylesheet" href="/css/style.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <!-- Cloudflare Web Analytics -->
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "ef5b341a90de40ae9bfff903ffb7d1b5"}'></script>
 </head>
@@ -141,32 +143,100 @@
         </div>
     </section>
 
-    <!-- Coming Soon -->
+    <!-- Interactive Data Visualizations -->
     <section style="padding: var(--spacing-2xl) 0; background: var(--color-bg-secondary);">
-        <div class="container" style="max-width: 900px; text-align: center;">
-            <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--spacing-lg);">
-                📈 Interactive Visualizations Coming Soon
+        <div class="container" style="max-width: 1200px;">
+            <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--spacing-lg); text-align: center;">
+                📈 Interactive Data Visualizations
             </h3>
 
-            <div class="alert alert-info" style="text-align: left;">
-                <div class="alert-icon">ℹ️</div>
-                <div class="alert-content">
-                    <div class="alert-title">In Development</div>
-                    <div class="alert-message">
-                        We're building interactive charts, maps, and data explorers. Check back soon for:
-                        <ul style="margin-top: var(--spacing-sm); margin-left: var(--spacing-lg);">
-                            <li>County-level SNAP participation trends</li>
-                            <li>Food insecurity heat maps</li>
-                            <li>Demographic breakdowns</li>
-                            <li>Downloadable reports (CSV, PDF)</li>
-                        </ul>
+            <!-- SNAP Participation Trend -->
+            <div class="card" style="margin-bottom: var(--spacing-xl);">
+                <h4 style="font-size: var(--font-size-xl); margin-bottom: var(--spacing-md);">
+                    SNAP Participation Trends (2024)
+                </h4>
+                <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
+                    Monthly SNAP participation in the KC metro area showing households, individuals, and total benefits distributed.
+                </p>
+                <div style="position: relative; height: 400px;">
+                    <canvas id="snapTrendChart"></canvas>
+                </div>
+            </div>
+
+            <!-- County Comparison -->
+            <div class="card" style="margin-bottom: var(--spacing-xl);">
+                <h4 style="font-size: var(--font-size-xl); margin-bottom: var(--spacing-md);">
+                    SNAP Participation by County
+                </h4>
+                <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
+                    SNAP participation rates vary significantly across KC metro counties.
+                </p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-xl); margin-bottom: var(--spacing-lg);">
+                    <div style="position: relative; height: 300px;">
+                        <canvas id="countyParticipationChart"></canvas>
+                    </div>
+                    <div style="position: relative; height: 300px;">
+                        <canvas id="countyRateChart"></canvas>
                     </div>
                 </div>
             </div>
 
-            <div style="margin-top: var(--spacing-xl);">
-                <a href="/resources" class="btn btn-primary btn-lg">Browse Resources</a>
-                <a href="/faq" class="btn btn-outline btn-lg" style="margin-left: var(--spacing-md);">View FAQ</a>
+            <!-- Food Insecurity -->
+            <div class="card" style="margin-bottom: var(--spacing-xl);">
+                <h4 style="font-size: var(--font-size-xl); margin-bottom: var(--spacing-md);">
+                    Food Insecurity Rates by County
+                </h4>
+                <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
+                    Overall vs. child food insecurity rates show that children are disproportionately affected.
+                </p>
+                <div style="position: relative; height: 400px;">
+                    <canvas id="foodInsecurityChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Demographics -->
+            <div class="card" style="margin-bottom: var(--spacing-xl);">
+                <h4 style="font-size: var(--font-size-xl); margin-bottom: var(--spacing-md);">
+                    SNAP Participation by Demographics
+                </h4>
+                <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
+                    SNAP recipients by age group and race/ethnicity in the KC metro area.
+                </p>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-xl);">
+                    <div style="position: relative; height: 300px;">
+                        <canvas id="ageGroupChart"></canvas>
+                    </div>
+                    <div style="position: relative; height: 300px;">
+                        <canvas id="raceEthnicityChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Historical Trends -->
+            <div class="card" style="margin-bottom: var(--spacing-xl);">
+                <h4 style="font-size: var(--font-size-xl); margin-bottom: var(--spacing-md);">
+                    5-Year Historical Trends
+                </h4>
+                <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
+                    SNAP participation declined from 2020-2023 but increased slightly in 2024. Food insecurity has remained relatively stable.
+                </p>
+                <div style="position: relative; height: 400px;">
+                    <canvas id="historicalTrendChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Download Data -->
+            <div style="text-align: center; margin-top: var(--spacing-2xl);">
+                <h4 style="font-size: var(--font-size-xl); margin-bottom: var(--spacing-md);">Download Data</h4>
+                <p style="color: var(--color-text-secondary); margin-bottom: var(--spacing-lg);">
+                    Access the full dataset for your own analysis.
+                </p>
+                <a href="/data/kc-food-security-data.json" class="btn btn-primary btn-lg" download>
+                    📥 Download JSON Data
+                </a>
+                <p style="margin-top: var(--spacing-md); color: var(--color-text-secondary); font-size: var(--font-size-sm);">
+                    Last updated: November 5, 2025 | Data sources: USDA FNS, Feeding America, US Census Bureau
+                </p>
             </div>
         </div>
     </section>
@@ -213,5 +283,303 @@
     </footer>
 
     <script src="/js/main.js"></script>
+
+    <!-- Data Visualization Script -->
+    <script>
+        // Load data and initialize charts
+        fetch('/data/kc-food-security-data.json')
+            .then(response => response.json())
+            .then(data => {
+                // Chart.js default config
+                Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+                Chart.defaults.color = '#4a5568';
+
+                // 1. SNAP Participation Trend (Line Chart)
+                const snapTrendCtx = document.getElementById('snapTrendChart').getContext('2d');
+                new Chart(snapTrendCtx, {
+                    type: 'line',
+                    data: {
+                        labels: data.snap_participation.monthly_2024.map(m => m.month),
+                        datasets: [
+                            {
+                                label: 'Individuals',
+                                data: data.snap_participation.monthly_2024.map(m => m.individuals),
+                                borderColor: '#3182ce',
+                                backgroundColor: 'rgba(49, 130, 206, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            },
+                            {
+                                label: 'Households',
+                                data: data.snap_participation.monthly_2024.map(m => m.households),
+                                borderColor: '#805ad5',
+                                backgroundColor: 'rgba(128, 90, 213, 0.1)',
+                                tension: 0.4,
+                                fill: true
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: true, position: 'top' },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + context.parsed.y.toLocaleString();
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value.toLocaleString();
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // 2. County Participation (Bar Chart)
+                const countyParticipationCtx = document.getElementById('countyParticipationChart').getContext('2d');
+                new Chart(countyParticipationCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.snap_participation.by_county_2024.map(c => c.county),
+                        datasets: [{
+                            label: 'Individuals',
+                            data: data.snap_participation.by_county_2024.map(c => c.individuals),
+                            backgroundColor: [
+                                '#3182ce',
+                                '#805ad5',
+                                '#38a169',
+                                '#d69e2e',
+                                '#e53e3e'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            title: { display: true, text: 'SNAP Recipients by County' }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    callback: function(value) {
+                                        return (value / 1000) + 'k';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // 3. County Participation Rate (Horizontal Bar)
+                const countyRateCtx = document.getElementById('countyRateChart').getContext('2d');
+                new Chart(countyRateCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.snap_participation.by_county_2024.map(c => c.county),
+                        datasets: [{
+                            label: 'Participation Rate (%)',
+                            data: data.snap_participation.by_county_2024.map(c => c.participation_rate),
+                            backgroundColor: [
+                                '#3182ce',
+                                '#805ad5',
+                                '#38a169',
+                                '#d69e2e',
+                                '#e53e3e'
+                            ]
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: false },
+                            title: { display: true, text: 'SNAP Participation Rate (%)' }
+                        },
+                        scales: {
+                            x: {
+                                beginAtZero: true,
+                                max: 20,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // 4. Food Insecurity by County (Grouped Bar)
+                const foodInsecurityCtx = document.getElementById('foodInsecurityChart').getContext('2d');
+                new Chart(foodInsecurityCtx, {
+                    type: 'bar',
+                    data: {
+                        labels: data.food_insecurity.by_county_2024.map(c => c.county),
+                        datasets: [
+                            {
+                                label: 'Overall Rate (%)',
+                                data: data.food_insecurity.by_county_2024.map(c => c.overall_rate),
+                                backgroundColor: '#3182ce'
+                            },
+                            {
+                                label: 'Child Rate (%)',
+                                data: data.food_insecurity.by_county_2024.map(c => c.child_rate),
+                                backgroundColor: '#e53e3e'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: true, position: 'top' }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 30,
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                // 5. Age Group Distribution (Doughnut)
+                const ageGroupCtx = document.getElementById('ageGroupChart').getContext('2d');
+                new Chart(ageGroupCtx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: data.demographics.by_demographic.map(d => d.group),
+                        datasets: [{
+                            data: data.demographics.by_demographic.map(d => d.snap_percent),
+                            backgroundColor: [
+                                '#3182ce',
+                                '#805ad5',
+                                '#38a169'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: true, position: 'bottom' },
+                            title: { display: true, text: 'SNAP Recipients by Age Group (%)' }
+                        }
+                    }
+                });
+
+                // 6. Race/Ethnicity Distribution (Pie)
+                const raceEthnicityCtx = document.getElementById('raceEthnicityChart').getContext('2d');
+                new Chart(raceEthnicityCtx, {
+                    type: 'pie',
+                    data: {
+                        labels: data.demographics.by_race_ethnicity.map(d => d.group),
+                        datasets: [{
+                            data: data.demographics.by_race_ethnicity.map(d => d.snap_percent),
+                            backgroundColor: [
+                                '#3182ce',
+                                '#805ad5',
+                                '#d69e2e',
+                                '#38a169',
+                                '#e53e3e'
+                            ]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: { display: true, position: 'bottom' },
+                            title: { display: true, text: 'SNAP Recipients by Race/Ethnicity (%)' }
+                        }
+                    }
+                });
+
+                // 7. Historical Trends (Multi-Line)
+                const historicalTrendCtx = document.getElementById('historicalTrendChart').getContext('2d');
+                new Chart(historicalTrendCtx, {
+                    type: 'line',
+                    data: {
+                        labels: data.historical_trends.snap_participation_5yr.map(y => y.year),
+                        datasets: [
+                            {
+                                label: 'SNAP Individuals',
+                                data: data.historical_trends.snap_participation_5yr.map(y => y.individuals),
+                                borderColor: '#3182ce',
+                                backgroundColor: 'rgba(49, 130, 206, 0.1)',
+                                yAxisID: 'y',
+                                tension: 0.4
+                            },
+                            {
+                                label: 'Food Insecurity Rate (%)',
+                                data: data.historical_trends.food_insecurity_5yr.map(y => y.rate),
+                                borderColor: '#e53e3e',
+                                backgroundColor: 'rgba(229, 62, 62, 0.1)',
+                                yAxisID: 'y1',
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        plugins: {
+                            legend: { display: true, position: 'top' }
+                        },
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                title: { display: true, text: 'SNAP Individuals' },
+                                ticks: {
+                                    callback: function(value) {
+                                        return (value / 1000) + 'k';
+                                    }
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                title: { display: true, text: 'Food Insecurity Rate (%)' },
+                                grid: { drawOnChartArea: false },
+                                ticks: {
+                                    callback: function(value) {
+                                        return value + '%';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Error loading data:', error);
+            });
+    </script>
 </body>
 </html>
