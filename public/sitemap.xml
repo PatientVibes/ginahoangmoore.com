@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <!-- Homepage -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    <!-- Homepage (English) -->
     <url>
         <loc>https://ginahoangmoore.com/</loc>
-        <lastmod>2025-11-04</lastmod>
+        <lastmod>2025-11-05</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="es" href="https://ginahoangmoore.com/es/" />
+        <xhtml:link rel="alternate" hreflang="en" href="https://ginahoangmoore.com/" />
+    </url>
+
+    <!-- Homepage (Spanish) -->
+    <url>
+        <loc>https://ginahoangmoore.com/es/</loc>
+        <lastmod>2025-11-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://ginahoangmoore.com/" />
+        <xhtml:link rel="alternate" hreflang="es" href="https://ginahoangmoore.com/es/" />
     </url>
 
     <!-- Main Sections -->
