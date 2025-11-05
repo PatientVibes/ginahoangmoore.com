@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Find resources near you by ZIP code in Kansas City metro. Search 95+ verified food, housing, utility, and mental health services.">
+    <title>Search Resources by ZIP Code | KC Food Security Hub</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/category-pages.css">
+
+    <!-- Cloudflare Web Analytics -->
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "ef5b341a90de40ae9bfff903ffb7d1b5"}'></script>
+</head>
+<body>
+    <div id="crisis-banner" class="crisis-banner" role="alert">
+        <div class="container">
+            <span class="crisis-icon">⚠️</span>
+            <strong>SNAP Benefit Alert:</strong> November 2025 benefits delayed due to federal shutdown.
+            <a href="/crisis" class="crisis-link">Get immediate help →</a>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav-brand">
+                    <h1><a href="/">KC Food Security Hub</a></h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/resources" class="active">Resources</a></li>
+                    <li><a href="/data">Data</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                    <li><a href="/get-involved">Get Involved</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: var(--spacing-2xl) var(--spacing-lg); max-width: 1200px;">
+        <div id="search-header" style="margin-bottom: var(--spacing-xl);">
+            <h2 style="font-size: var(--font-size-3xl); margin-bottom: var(--spacing-md);">
+                Resources Near <span id="zip-display"></span>
+            </h2>
+
+            <!-- Search Form -->
+            <form id="zipSearchForm" style="max-width: 600px; margin-bottom: var(--spacing-lg);">
+                <div style="display: flex; gap: var(--spacing-md); flex-wrap: wrap;">
+                    <input
+                        type="text"
+                        id="zipInput"
+                        placeholder="Enter ZIP code"
+                        pattern="[0-9]{5}"
+                        maxlength="5"
+                        style="flex: 1; min-width: 200px; padding: var(--spacing-3); font-size: var(--font-size-lg); border: 2px solid var(--color-border); border-radius: var(--border-radius);"
+                        required
+                    />
+                    <button type="submit" class="btn btn-primary">
+                        <span style="margin-right: var(--spacing-2);">📍</span>
+                        Search
+                    </button>
+                </div>
+            </form>
+
+            <!-- Filters -->
+            <div id="filters" style="display: flex; gap: var(--spacing-md); flex-wrap: wrap; margin-bottom: var(--spacing-lg);">
+                <select id="categoryFilter" class="btn btn-outline" style="padding: var(--spacing-2) var(--spacing-3);">
+                    <option value="">All Categories</option>
+                    <option value="food">Food Assistance</option>
+                    <option value="housing">Housing</option>
+                    <option value="utilities">Utilities</option>
+                    <option value="mental-health">Mental Health</option>
+                    <option value="healthcare">Healthcare</option>
+                </select>
+
+                <select id="radiusFilter" class="btn btn-outline" style="padding: var(--spacing-2) var(--spacing-3);">
+                    <option value="25">Within 25 miles</option>
+                    <option value="10">Within 10 miles</option>
+                    <option value="15">Within 15 miles</option>
+                    <option value="50">Within 50 miles</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Searching for resources near you...</p>
+        </div>
+
+        <!-- Results -->
+        <div id="results"></div>
+
+        <!-- No Results -->
+        <div id="no-results" style="display: none;" class="alert alert-info">
+            <div class="alert-icon">ℹ️</div>
+            <div class="alert-content">
+                <div class="alert-title">No resources found</div>
+                <div class="alert-message">
+                    Try expanding your search radius or <a href="tel:211">call 211</a> for personalized assistance.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 GinaHoangMoore.com | <a href="/privacy">Privacy</a></p>
+        </div>
+    </footer>
+
+    <script>
+        async function searchResources() {
+            const params = new URLSearchParams(window.location.search);
+            const zip = params.get('zip') || document.getElementById('zipInput').value;
+            const category = document.getElementById('categoryFilter').value;
+            const radius = document.getElementById('radiusFilter').value;
+
+            if (!zip) {
+                document.getElementById('no-results').style.display = 'block';
+                return;
+            }
+
+            document.getElementById('zip-display').textContent = zip;
+            document.getElementById('zipInput').value = zip;
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('results').innerHTML = '';
+            document.getElementById('no-results').style.display = 'none';
+
+            try {
+                let url = `/api/resources?zip=${zip}&radius=${radius}`;
+                if (category) url += `&category=${category}`;
+
+                const response = await fetch(url);
+                const data = await response.json();
+
+                document.getElementById('loading').style.display = 'none';
+
+                if (data.success && data.data && data.data.length > 0) {
+                    displayResults(data.data, data.userLocation);
+                } else {
+                    document.getElementById('no-results').style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('no-results').style.display = 'block';
+            }
+        }
+
+        function displayResults(resources, userLocation) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <p style="margin-bottom: var(--spacing-lg); color: var(--color-text-secondary);">
+                    Found <strong>${resources.length}</strong> resource${resources.length !== 1 ? 's' : ''}
+                </p>
+                <div class="resource-list">
+                    ${resources.map(r => `
+                        <div class="card">
+                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: var(--spacing-md);">
+                                <h3 style="margin: 0;">${r.name}</h3>
+                                ${r.distance ? `<span class="badge" style="background: var(--color-kc-blue); color: white; padding: var(--spacing-xs) var(--spacing-sm); border-radius: var(--border-radius); font-size: var(--font-size-sm); white-space: nowrap;">${r.distance} mi</span>` : ''}
+                            </div>
+                            ${r.description ? `<p style="margin-bottom: var(--spacing-md);">${r.description}</p>` : ''}
+                            ${r.phone_formatted ? `<p><strong>Phone:</strong> <a href="tel:${r.phone}">${r.phone_formatted}</a></p>` : ''}
+                            ${r.address ? `<p><strong>Address:</strong> ${r.address}${r.city ? `, ${r.city}` : ''}${r.state ? `, ${r.state}` : ''} ${r.zip || ''}</p>` : ''}
+                            ${r.hours_of_operation ? `<p><strong>Hours:</strong> ${r.hours_of_operation}</p>` : ''}
+                            ${r.website ? `<p><a href="${r.website}" target="_blank" class="btn btn-outline" style="margin-top: var(--spacing-md);">Visit Website →</a></p>` : ''}
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // Initial search on page load
+        window.addEventListener('DOMContentLoaded', searchResources);
+
+        // Handle form submission
+        document.getElementById('zipSearchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const zip = document.getElementById('zipInput').value.trim();
+            if (zip && /^\d{5}$/.test(zip)) {
+                const params = new URLSearchParams(window.location.search);
+                params.set('zip', zip);
+                window.location.search = params.toString();
+            }
+        });
+
+        // Handle filter changes
+        document.getElementById('categoryFilter').addEventListener('change', searchResources);
+        document.getElementById('radiusFilter').addEventListener('change', searchResources);
+    </script>
+</body>
+</html>

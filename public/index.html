@@ -124,6 +124,31 @@
                     </p>
                 </div>
 
+                <!-- ZIP Code Search -->
+                <div style="max-width: 600px; margin: 0 auto var(--spacing-2xl);">
+                    <form id="zipSearch" style="display: flex; gap: var(--spacing-md); flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 200px;">
+                            <input
+                                type="text"
+                                id="zipInput"
+                                name="zip"
+                                placeholder="Enter your ZIP code (e.g., 64106)"
+                                pattern="[0-9]{5}"
+                                maxlength="5"
+                                style="width: 100%; padding: var(--spacing-3); font-size: var(--font-size-lg); border: 2px solid white; border-radius: var(--border-radius); background: rgba(255, 255, 255, 0.9);"
+                                required
+                            />
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg" style="white-space: nowrap;">
+                            <span style="margin-right: var(--spacing-2);">📍</span>
+                            Find Resources Near Me
+                        </button>
+                    </form>
+                    <p style="text-align: center; margin-top: var(--spacing-sm); color: white; font-size: var(--font-size-sm); opacity: 0.8;">
+                        Search 95+ verified resources in the KC metro area
+                    </p>
+                </div>
+
                 <!-- Help Grid - Reduced to 4 Primary Categories -->
                 <div class="help-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--spacing-lg); margin-bottom: var(--spacing-2xl);">
                     <a href="/resources/food" class="help-button help-button-food">
@@ -390,5 +415,20 @@
     </style>
 
     <script src="/js/main.js"></script>
+
+    <!-- ZIP Code Search Handler -->
+    <script>
+        document.getElementById('zipSearch').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const zip = document.getElementById('zipInput').value.trim();
+
+            if (zip && /^\d{5}$/.test(zip)) {
+                // Redirect to API test for now (will create search page next)
+                window.location.href = '/api/resources?zip=' + zip;
+            } else {
+                alert('Please enter a valid 5-digit ZIP code');
+            }
+        });
+    </script>
 </body>
 </html>
