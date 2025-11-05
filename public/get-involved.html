@@ -3,16 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Volunteer, donate, and advocate for food security in Kansas City - make a difference in your community.">
+    <meta name="description" content="Volunteer, donate, and advocate for food security in Kansas City - make a difference in your community through volunteering at food pantries, donating to local nonprofits, or submitting resources to help others.">
     <title>Get Involved | KC Food Security Hub</title>
     <link rel="stylesheet" href="/css/tokens.css">
     <link rel="stylesheet" href="/css/components.css">
     <link rel="stylesheet" href="/css/style.css">
+    <style>
+        .involvement-hero {
+            background: linear-gradient(135deg, var(--color-kc-gold) 0%, var(--color-kc-gold-dark) 100%);
+            color: white;
+            padding: var(--spacing-2xl) 0;
+            text-align: center;
+        }
+
+        .involvement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .involvement-card {
+            background: white;
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: all var(--transition-base);
+        }
+
+        .involvement-card:hover {
+            box-shadow: var(--box-shadow-lg);
+            transform: translateY(-4px);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: var(--spacing-md);
+            color: var(--text-primary);
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-lg);
+            line-height: 1.6;
+        }
+
+        .card-benefits {
+            list-style: none;
+            padding: 0;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .card-benefits li {
+            padding: var(--spacing-xs) 0;
+            color: var(--text-secondary);
+        }
+
+        .card-benefits li:before {
+            content: "✓ ";
+            color: var(--success);
+            font-weight: bold;
+            margin-right: var(--spacing-xs);
+        }
+
+        .platform-logos {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-top: var(--spacing-md);
+            padding-top: var(--spacing-md);
+            border-top: 1px solid var(--bg-medium);
+        }
+
+        .platform-badge {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            background: var(--bg-light);
+            border-radius: var(--border-radius);
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .cta-section {
+            background: var(--bg-light);
+            padding: var(--spacing-2xl) 0;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--spacing-md);
+            margin: var(--spacing-xl) 0;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--kc-blue-dark);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+    </style>
     <!-- Cloudflare Web Analytics -->
     <script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "ef5b341a90de40ae9bfff903ffb7d1b5"}'></script>
 </head>
 <body>
-    <div id="crisis-banner" class="crisis-banner" role="alert" aria-live="assertive"><div class="container"><span class="crisis-icon">⚠️</span><strong>SNAP Benefit Alert:</strong> November 2025 benefits delayed due to federal shutdown. <a href="/crisis" class="crisis-link">Get immediate help →</a></div></div>
+    <!-- Crisis Banner -->
+    <div id="crisis-banner" class="crisis-banner" role="alert" aria-live="assertive">
+        <div class="container">
+            <span class="crisis-icon">⚠️</span>
+            <strong>SNAP Benefit Alert:</strong> November 2025 benefits delayed due to federal shutdown.
+            <a href="/crisis" class="crisis-link">Get immediate help →</a>
+        </div>
+    </div>
+
+    <!-- Header -->
     <header class="header">
         <div class="container">
             <nav class="nav">
@@ -33,9 +156,227 @@
             </nav>
         </div>
     </header>
-    <section style="background: linear-gradient(135deg, var(--color-kc-gold) 0%, var(--color-kc-gold-dark) 100%); color: white; padding: var(--spacing-2xl) 0; text-align: center;"><div class="container"><h2 style="font-size: var(--font-size-4xl); margin-bottom: var(--spacing-md);">🤝 Get Involved</h2><p style="font-size: var(--font-size-lg); max-width: 800px; margin: 0 auto;">Make a difference in the Kansas City community</p></div></section>
-    <section style="padding: var(--spacing-2xl) 0;"><div class="container"><div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--spacing-lg);"><div class="card"><h3>💵 Donate</h3><p>Every $1 donated provides 9 meals through Harvesters</p><a href="https://www.harvesters.org/give" target="_blank" class="btn btn-primary btn-full">Donate to Harvesters</a></div><div class="card"><h3>🙋 Volunteer</h3><p>Pack food boxes, distribute meals, and support pantries</p><a href="https://www.harvesters.org/volunteer" target="_blank" class="btn btn-secondary btn-full">Find Opportunities</a></div><div class="card"><h3>📢 Advocate</h3><p>Support policies that address food insecurity</p><a href="tel:211" class="btn btn-outline btn-full">Call 211 for Info</a></div></div></div></section>
-    <footer class="footer"><div class="container"><div class="footer-bottom"><p>&copy; 2025 GinaHoangMoore.com</p></div></div></footer>
+
+    <!-- Hero Section -->
+    <section class="involvement-hero">
+        <div class="container">
+            <h2 style="font-size: var(--font-size-4xl); margin-bottom: var(--spacing-md);">🤝 Get Involved</h2>
+            <p style="font-size: var(--font-size-lg); max-width: 800px; margin: 0 auto;">
+                Make a difference in the Kansas City community through volunteering, donations, and sharing resources
+            </p>
+
+            <!-- Impact Stats -->
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">125+</div>
+                    <div class="stat-label">Resources Listed</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">1 in 7</div>
+                    <div class="stat-label">KC Residents Food Insecure</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">$1 = 9</div>
+                    <div class="stat-label">Meals Through Harvesters</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section style="padding: var(--spacing-2xl) 0;">
+        <div class="container">
+            <div class="involvement-grid">
+                <!-- Volunteer -->
+                <div class="involvement-card">
+                    <div class="card-icon">🙋</div>
+                    <h3 class="card-title">Volunteer Your Time</h3>
+                    <p class="card-description">
+                        Join hundreds of volunteers making a difference at food pantries, meal distribution sites, and community programs across Kansas City.
+                    </p>
+                    <ul class="card-benefits">
+                        <li>Pack and distribute food boxes</li>
+                        <li>Support pantry operations</li>
+                        <li>Help with community events</li>
+                        <li>Flexible scheduling options</li>
+                    </ul>
+                    <a href="https://www.idealist.org/en/volunteer?q=food%20security&locationType=REGION&locationName=Kansas%20City%2C%20MO%2C%20USA" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full">Find Volunteer Opportunities</a>
+
+                    <div class="platform-logos">
+                        <span class="platform-badge">Idealist</span>
+                        <span class="platform-badge">Harvesters</span>
+                        <span class="platform-badge">United Way 211</span>
+                    </div>
+                </div>
+
+                <!-- Donate -->
+                <div class="involvement-card">
+                    <div class="card-icon">💝</div>
+                    <h3 class="card-title">Make a Donation</h3>
+                    <p class="card-description">
+                        Financial contributions directly support food pantries, meal programs, and emergency assistance for families in need. Every dollar makes an impact.
+                    </p>
+                    <ul class="card-benefits">
+                        <li>$1 provides 9 meals through Harvesters</li>
+                        <li>Tax-deductible contributions</li>
+                        <li>100% goes to local organizations</li>
+                        <li>Monthly giving options available</li>
+                    </ul>
+                    <a href="https://www.harvesters.org/give" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-full">Donate to Harvesters</a>
+
+                    <div class="platform-logos">
+                        <span class="platform-badge">PayPal</span>
+                        <span class="platform-badge">Stripe</span>
+                        <span class="platform-badge">Venmo</span>
+                        <span class="platform-badge">Cash App</span>
+                    </div>
+                </div>
+
+                <!-- Submit Resource -->
+                <div class="involvement-card">
+                    <div class="card-icon">📝</div>
+                    <h3 class="card-title">Submit a Resource</h3>
+                    <p class="card-description">
+                        Know of a food pantry, assistance program, or community resource that's not listed? Help us expand our directory to serve more people.
+                    </p>
+                    <ul class="card-benefits">
+                        <li>Quick 5-minute submission form</li>
+                        <li>Admin review within 48 hours</li>
+                        <li>Help thousands find assistance</li>
+                        <li>Update existing resource info</li>
+                    </ul>
+                    <a href="/submit-resource" class="btn btn-secondary btn-full">Submit a Resource</a>
+
+                    <div class="platform-logos">
+                        <span class="platform-badge">Community-Powered</span>
+                        <span class="platform-badge">Verified by Admins</span>
+                    </div>
+                </div>
+
+                <!-- Advocate -->
+                <div class="involvement-card">
+                    <div class="card-icon">📢</div>
+                    <h3 class="card-title">Advocate for Change</h3>
+                    <p class="card-description">
+                        Support policies and programs that address food insecurity at local, state, and federal levels. Your voice matters.
+                    </p>
+                    <ul class="card-benefits">
+                        <li>Contact elected officials</li>
+                        <li>Share resources on social media</li>
+                        <li>Educate your community</li>
+                        <li>Support SNAP and WIC programs</li>
+                    </ul>
+                    <a href="tel:211" class="btn btn-outline btn-full">Call 211 for Info</a>
+
+                    <div class="platform-logos">
+                        <span class="platform-badge">Policy Advocacy</span>
+                        <span class="platform-badge">Community Education</span>
+                    </div>
+                </div>
+
+                <!-- Spread the Word -->
+                <div class="involvement-card">
+                    <div class="card-icon">🔗</div>
+                    <h3 class="card-title">Spread the Word</h3>
+                    <p class="card-description">
+                        Help us reach more people in need by sharing this resource directory with your network, community organizations, and social media.
+                    </p>
+                    <ul class="card-benefits">
+                        <li>Share with social workers</li>
+                        <li>Post on community boards</li>
+                        <li>Tell friends and family</li>
+                        <li>Link from your organization's website</li>
+                    </ul>
+                    <a href="https://twitter.com/intent/tweet?text=Find%20food%20assistance%20resources%20in%20Kansas%20City%3A&url=https://ginahoangmoore.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-full">Share on Twitter</a>
+
+                    <div class="platform-logos">
+                        <span class="platform-badge">Facebook</span>
+                        <span class="platform-badge">Twitter</span>
+                        <span class="platform-badge">Email</span>
+                    </div>
+                </div>
+
+                <!-- Partner Organizations -->
+                <div class="involvement-card">
+                    <div class="card-icon">🤝</div>
+                    <h3 class="card-title">Partner With Us</h3>
+                    <p class="card-description">
+                        Are you a nonprofit, government agency, or community organization? Let's collaborate to expand food security resources.
+                    </p>
+                    <ul class="card-benefits">
+                        <li>Data sharing partnerships</li>
+                        <li>Co-marketing opportunities</li>
+                        <li>Resource verification help</li>
+                        <li>Custom integrations available</li>
+                    </ul>
+                    <a href="mailto:contact@ginahoangmoore.com" class="btn btn-outline btn-full">Contact Us</a>
+
+                    <div class="platform-logos">
+                        <span class="platform-badge">API Access</span>
+                        <span class="platform-badge">Data Partnership</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h3 style="font-size: var(--font-size-2xl); margin-bottom: var(--spacing-md); color: var(--text-primary);">
+                    Every Action Counts
+                </h3>
+                <p style="color: var(--text-secondary); margin-bottom: var(--spacing-xl);">
+                    Whether you have 30 minutes to volunteer, $10 to donate, or 5 minutes to share this site, your contribution helps build a stronger, more food-secure Kansas City.
+                </p>
+                <div style="display: flex; gap: var(--spacing-md); justify-content: center; flex-wrap: wrap;">
+                    <a href="/resources" class="btn btn-primary">Browse Resources</a>
+                    <a href="/submit-resource" class="btn btn-secondary">Submit Resource</a>
+                    <a href="tel:211" class="btn btn-outline">Call 211</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>About This Site</h4>
+                    <p>Verified assistance resources for the Kansas City metro area.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/resources">All Resources</a></li>
+                        <li><a href="/faq">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Get Involved</h4>
+                    <ul>
+                        <li><a href="/submit-resource">Submit a Resource</a></li>
+                        <li><a href="/about">About & Methodology</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Emergency Contacts</h4>
+                    <ul>
+                        <li>📞 United Way 211: <a href="tel:211">Dial 211</a></li>
+                        <li>🆘 Crisis Line: <a href="tel:988">Dial 988</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GinaHoangMoore.com | <a href="https://github.com/PatientVibes/ginahoangmoore.com">GitHub</a></p>
+            </div>
+        </div>
+    </footer>
+
     <script src="/js/main.js"></script>
 </body>
 </html>
