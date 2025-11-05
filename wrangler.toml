@@ -37,6 +37,6 @@ database_name = "kc-food-security-preview"
 database_id = "" # Will be filled after preview database creation
 
 # Email configuration (Cloudflare Email Routing)
-[send_email]
+[[send_email]]
 name = "SEND_EMAIL"
 destination_address = "gina.pacis.moore@gmail.com"
