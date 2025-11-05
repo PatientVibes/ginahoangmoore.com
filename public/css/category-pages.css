@@ -204,6 +204,37 @@
     filter: brightness(0.95);
 }
 
+.action-volunteer {
+    background: var(--color-mental-health);
+    color: white;
+}
+
+.action-volunteer:hover {
+    background: #6A1B9A;
+    text-decoration: none;
+}
+
+.action-donate {
+    background: var(--kc-red);
+    color: white;
+}
+
+.action-donate:hover {
+    background: var(--kc-red-dark);
+    text-decoration: none;
+}
+
+.donation-button-container {
+    display: inline-block;
+    margin: 0;
+}
+
+.donation-button-container form,
+.donation-button-container iframe {
+    display: inline-block;
+    margin: 0;
+}
+
 .error-message {
     text-align: center;
     padding: var(--spacing-2xl);

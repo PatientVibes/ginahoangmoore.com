@@ -118,6 +118,15 @@ function renderResource(resource, category) {
                 ${resource.website ? `
                     <a href="${escapeHtml(resource.website)}" target="_blank" rel="noopener noreferrer" class="action-btn action-website">🌐 Visit Website</a>
                 ` : ''}
+                ${resource.volunteer_url ? `
+                    <a href="${escapeHtml(resource.volunteer_url)}" target="_blank" rel="noopener noreferrer" class="action-btn action-volunteer">🙋 Volunteer</a>
+                ` : ''}
+                ${resource.donation_url ? `
+                    <a href="${escapeHtml(resource.donation_url)}" target="_blank" rel="noopener noreferrer" class="action-btn action-donate">💝 Donate</a>
+                ` : ''}
+                ${resource.donation_button_html ? `
+                    <div class="donation-button-container">${resource.donation_button_html}</div>
+                ` : ''}
             </div>
         </div>
     `;
