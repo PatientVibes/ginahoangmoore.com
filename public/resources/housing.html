@@ -87,28 +87,22 @@
     <!-- Resources Section -->
     <section class="resources-section">
         <div class="container">
-            <!-- Fallback Content -->
-            <div class="resource-list">
+            <!-- Loading State -->
+            <div id="loading" class="loading">
+                <p>Loading housing resources...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="error-container" style="display: none;">
                 <div class="card">
                     <h3 style="margin-bottom: var(--spacing-md);">📞 Call 211 - Immediate Housing Help</h3>
                     <p style="margin-bottom: var(--spacing-md);">United Way 211 connects you with emergency shelters, rent assistance, and eviction prevention programs in your area</p>
                     <a href="tel:211" class="btn btn-danger btn-full">Call 211 Now</a>
                 </div>
-
-                <div class="card">
-                    <h3 style="margin-bottom: var(--spacing-md);">⚖️ Legal Aid of Western Missouri</h3>
-                    <p style="margin-bottom: var(--spacing-md);">Free legal help for eviction cases and housing issues</p>
-                    <p><strong>Phone:</strong> <a href="tel:8164744665">(816) 474-6750</a></p>
-                    <p style="margin-top: var(--spacing-sm);"><strong>Kansas City Eviction Help:</strong> <a href="https://www.kcmo.gov/city-hall/housing" target="_blank" rel="noopener">kcmo.gov/housing</a></p>
-                </div>
-
-                <div class="card">
-                    <h3 style="margin-bottom: var(--spacing-md);">💡 Additional Resources</h3>
-                    <p style="margin-bottom: var(--spacing-md);">More assistance programs available</p>
-                    <a href="/resources" class="btn btn-outline">View All Resources</a>
-                    <a href="/faq" class="btn btn-outline" style="margin-left: var(--spacing-sm);">Read FAQ</a>
-                </div>
             </div>
+
+            <!-- Resources List -->
+            <div id="resources-container" class="resource-list" style="display: none;"></div>
         </div>
     </section>
 
@@ -163,5 +157,6 @@
     </footer>
 
     <script src="/js/main.js"></script>
+    <script src="/js/category-page.js" data-category="housing"></script>
 </body>
 </html>

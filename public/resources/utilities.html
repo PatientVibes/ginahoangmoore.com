@@ -78,28 +78,22 @@
 
     <section class="resources-section">
         <div class="container">
-            <!-- Fallback Content -->
-            <div class="resource-list">
+            <!-- Loading State -->
+            <div id="loading" class="loading">
+                <p>Loading utility assistance resources...</p>
+            </div>
+
+            <!-- Error State -->
+            <div id="error-container" style="display: none;">
                 <div class="card">
                     <h3 style="margin-bottom: var(--spacing-md);">📞 Call 211 - Utility Assistance</h3>
                     <p style="margin-bottom: var(--spacing-md);">Get connected to LIHEAP, utility company programs, and emergency bill assistance</p>
                     <a href="tel:211" class="btn btn-danger btn-full">Call 211 Now</a>
                 </div>
-
-                <div class="card">
-                    <h3 style="margin-bottom: var(--spacing-md);">💡 LIHEAP (Energy Assistance)</h3>
-                    <p style="margin-bottom: var(--spacing-md);"><strong>Missouri:</strong> <a href="tel:8553734636">(855) 373-4636</a> or visit <a href="https://mydss.mo.gov" target="_blank" rel="noopener">mydss.mo.gov</a></p>
-                    <p><strong>Kansas:</strong> <a href="tel:8883694777">(888) 369-4777</a> or visit <a href="https://www.dcf.ks.gov" target="_blank" rel="noopener">dcf.ks.gov</a></p>
-                </div>
-
-                <div class="card">
-                    <h3 style="margin-bottom: var(--spacing-md);">⚡ Utility Company Programs</h3>
-                    <p style="margin-bottom: var(--spacing-sm);"><strong>Evergy (Electric):</strong> CarePackage program</p>
-                    <p style="margin-bottom: var(--spacing-sm);"><strong>Spire (Gas):</strong> DollarHelp program</p>
-                    <p style="margin-bottom: var(--spacing-md);"><strong>Contact 211 for enrollment assistance</strong></p>
-                    <a href="tel:211" class="btn btn-outline">Call 211 for Help</a>
-                </div>
             </div>
+
+            <!-- Resources List -->
+            <div id="resources-container" class="resource-list" style="display: none;"></div>
         </div>
     </section>
 

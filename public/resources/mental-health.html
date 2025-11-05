@@ -82,28 +82,22 @@
     </section>
     <section class="resources-section">
         <div class="container">
-            <!-- Fallback Content -->
-            <div class="resource-list">
-                <div class="card">
-                    <h3 style="margin-bottom: var(--spacing-md);">🆘 988 Suicide & Crisis Lifeline</h3>
-                    <p style="margin-bottom: var(--spacing-md);">24/7 confidential support for people in distress, prevention and crisis resources</p>
-                    <a href="tel:988" class="btn btn-danger btn-full">Call or Text 988</a>
-                </div>
+            <!-- Loading State -->
+            <div id="loading" class="loading">
+                <p>Loading mental health resources...</p>
+            </div>
 
+            <!-- Error State -->
+            <div id="error-container" style="display: none;">
                 <div class="card">
-                    <h3 style="margin-bottom: var(--spacing-md);">📞 Call 211 - Mental Health Services</h3>
-                    <p style="margin-bottom: var(--spacing-md);">Connect with local counseling, therapy, and support groups in the KC area</p>
-                    <a href="tel:211" class="btn btn-primary btn-full">Call 211</a>
-                </div>
-
-                <div class="card">
-                    <h3 style="margin-bottom: var(--spacing-md);">🧠 KC Metro Mental Health Resources</h3>
-                    <p style="margin-bottom: var(--spacing-sm);"><strong>Swope Health:</strong> Sliding scale mental health services</p>
-                    <p style="margin-bottom: var(--spacing-sm);"><strong>Samuel U. Rodgers:</strong> Integrated behavioral health</p>
-                    <p style="margin-bottom: var(--spacing-sm);"><strong>ReDiscover:</strong> Crisis services</p>
-                    <p style="margin-top: var(--spacing-md);"><a href="tel:211" class="btn btn-outline">Call 211 for Referrals</a></p>
+                    <h3 style="margin-bottom: var(--spacing-md);">📞 Call 211</h3>
+                    <p style="margin-bottom: var(--spacing-md);">Get connected to mental health resources</p>
+                    <a href="tel:211" class="btn btn-danger btn-full">Call 211 Now</a>
                 </div>
             </div>
+
+            <!-- Resources List -->
+            <div id="resources-container" class="resource-list" style="display: none;"></div>
         </div>
     </section>
     <section class="quick-links-section">
