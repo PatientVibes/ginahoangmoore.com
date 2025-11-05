@@ -7,7 +7,7 @@
 
 **Domain:** ginahoangmoore.com
 **Purpose:** Kansas City metro food security resource platform
-**Status:** ✅ **PRODUCTION-READY**
+**Status:** ✅ **PRODUCTION-READY with ZIP Search & Spanish Translation**
 **Launch Date:** November 2025
 
 ---
@@ -15,10 +15,12 @@
 ## 📊 Current Site Statistics
 
 ### Content
-- **13 pages** total (HTML)
+- **14 pages** total (13 English + 1 Spanish)
 - **95 verified resources** in database
+- **100 ZIP codes** with coordinates in database
 - **6 categories:** Food, Housing, Utilities, Mental Health, Healthcare, Financial
 - **5 KC metro counties:** Jackson, Clay, Platte (MO), Johnson, Wyandotte (KS)
+- **2 languages:** English, Spanish (Español)
 
 ### Traffic & Performance
 - **Analytics:** Cloudflare Web Analytics (live)
@@ -86,9 +88,10 @@
 
 ### API Endpoints
 ```
-GET /api/resources?category={slug}     - Get resources by category
-GET /api/resources?zip={zipcode}       - Get resources by ZIP (not yet implemented)
-GET /api/resources?search={query}      - Search resources (not yet implemented)
+GET /api/resources?category={slug}              - Get resources by category
+GET /api/resources?zip={zipcode}                - ✅ Get resources by ZIP with distance
+GET /api/resources?zip={zipcode}&radius={miles} - ✅ Filter by distance (default: 25 miles)
+GET /api/resources?search={query}               - Search resources (not yet implemented)
 ```
 
 ### Static Files
@@ -313,36 +316,55 @@ CLOUDFLARE_TUNNEL_ID=e6ad6570-2f25-45e2-b620-f7d09f8ab6fa
 
 ### High Priority (High Impact, 2-4 hours each)
 
-#### 1. ZIP Code Search & Filtering
+#### 1. ✅ ZIP Code Search & Filtering [COMPLETED]
 **Why:** Makes resources immediately useful for users
 **Effort:** 2-3 hours
-**Status:** Not started
+**Status:** ✅ **COMPLETED** - November 5, 2025
 **Implementation:**
-- Add ZIP code input to homepage and resources page
-- Enhance API: `GET /api/resources?zip=64106`
-- Calculate distance from user location
-- Sort by proximity
-- Filter by: Hours open, Languages spoken, Services offered
+- ✅ Added ZIP code input to homepage (prominent hero section)
+- ✅ Enhanced API: `GET /api/resources?zip=64106&radius=25`
+- ✅ Calculate distance from user location using Haversine formula
+- ✅ Sort by proximity (nearest first)
+- ✅ Radius filtering with configurable distance (default: 25 miles)
 
-**Technical Approach:**
-- Frontend: JavaScript form handling
-- Backend: Update API function with ZIP code lookup
-- Database: Populate `zipcodes` table with KC metro codes
+**Technical Implementation:**
+- ✅ Frontend: JavaScript form handling with ZIP validation (5-digit pattern)
+- ✅ Backend: API enhanced with distance calculation (`functions/api/resources.ts`)
+- ✅ Database: 100 KC metro ZIP codes with coordinates (5 counties)
+- ✅ API returns distance in miles (rounded to 1 decimal) for each resource
+- ✅ Response includes user location coordinates and ZIP
 
-#### 2. Spanish Translation (Multilingual Support)
+**Deployment:**
+- Live URL: https://ginahoangmoore.com/
+- API Endpoint: `/api/resources?zip={zipcode}&radius={miles}`
+- Deployed: November 5, 2025
+
+**Next Steps:** Filter by hours open, languages spoken, services offered (not yet implemented)
+
+#### 2. ✅ Spanish Translation (Multilingual Support) [COMPLETED]
 **Why:** KC metro has significant Spanish-speaking population
 **Effort:** 3-4 hours
-**Status:** Not started
+**Status:** ✅ **COMPLETED** - November 5, 2025
 **Implementation:**
-- Create `/es/` Spanish pages (homepage, key pages)
-- Add language switcher to header
-- Translate resource descriptions
-- Add Spanish meta tags for SEO
+- ✅ Created `/es/` Spanish homepage with full translation
+- ✅ Added language switcher to header ("Español" / "English")
+- ✅ Translated all content: hero, stats, resources, footer, navigation
+- ✅ Added Spanish meta tags and structured data for SEO
+- ✅ ZIP code search integrated in Spanish
 
-**Technical Approach:**
-- Create duplicate pages with Spanish content
-- Use `<link rel="alternate" hreflang="es">` tags
-- Update sitemap with Spanish URLs
+**Technical Implementation:**
+- ✅ Created `public/es/index.html` with complete Spanish translation
+- ✅ Added `<link rel="alternate" hreflang="es">` tags to both English and Spanish pages
+- ✅ Updated sitemap.xml with Spanish URLs and hreflang references
+- ✅ Spanish locale metadata (es_US)
+- ✅ Emergency contacts (211, 988) prominently displayed in Spanish
+
+**Deployment:**
+- Live URL: https://ginahoangmoore.com/es/
+- Language switcher: Available in header navigation on all pages
+- Deployed: November 5, 2025
+
+**Next Steps:** Translate additional pages (resources, FAQ, crisis, data) - not yet implemented
 
 #### 3. Interactive Data Dashboard
 **Why:** Visualizes food insecurity for advocacy/research
@@ -567,6 +589,8 @@ f9bd280 - Add Bing Webmaster Tools verification (Nov 5)
 │   │   ├── mental-health.html
 │   │   ├── healthcare.html
 │   │   └── financial.html
+│   ├── es/                            # Spanish language pages
+│   │   └── index.html                 # Spanish homepage
 │   ├── index.html
 │   ├── crisis.html
 │   ├── data.html
@@ -586,7 +610,9 @@ f9bd280 - Add Bing Webmaster Tools verification (Nov 5)
 │   ├── README.md
 │   ├── schema.sql
 │   ├── seed-data-simple.sql
-│   └── seed-data-expansion.sql
+│   ├── seed-data-expansion.sql
+│   ├── zipcodes-kc-metro.sql           # ZIP codes with coordinates
+│   └── zipcodes-kc-metro-fixed.sql     # ZIP codes (INSERT OR IGNORE)
 ├── CLAUDE.md                       # Project overview
 ├── MONITORING_SETUP.md
 ├── PRODUCTION_DEPLOYMENT.md
