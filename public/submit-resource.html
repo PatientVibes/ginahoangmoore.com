@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Submit a community resource to KC Food Security Hub. Help expand our database of food assistance, housing, utility, and support services in Kansas City metro.">
+    <title>Submit a Resource | KC Food Security Hub</title>
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ginahoangmoore.com/submit-resource">
+    <meta property="og:title" content="Submit a Resource | KC Food Security Hub">
+    <meta property="og:description" content="Help expand our database of community resources in the Kansas City metro area.">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="/css/tokens.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ef5b341a90de40ae9bfff903ffb7d1b5"}'></script>
+
+    <style>
+        /* Form-specific styles */
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--spacing-2xl) var(--spacing-md);
+        }
+
+        .form-section {
+            background: white;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .form-section-title {
+            font-size: var(--font-size-xl);
+            color: var(--color-kc-blue-dark);
+            margin-bottom: var(--spacing-md);
+            padding-bottom: var(--spacing-3);
+            border-bottom: var(--border-width-2) solid var(--color-border-light);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--spacing-6);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .form-row-2col {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .form-row-3col {
+            grid-template-columns: 2fr 1fr 1fr;
+        }
+
+        @media (max-width: 768px) {
+            .form-row-2col,
+            .form-row-3col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: var(--spacing-4) var(--spacing-6);
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            background-color: var(--color-kc-blue);
+            color: white;
+            border: none;
+            border-radius: var(--radius-base);
+            cursor: pointer;
+            transition: var(--transition-colors);
+            min-height: var(--touch-target-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-2);
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background-color: var(--color-kc-blue-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .alert-success {
+            background-color: rgba(46, 125, 50, 0.1);
+            border-left: var(--border-width-4) solid var(--color-success);
+            color: var(--color-success-dark);
+            padding: var(--spacing-4);
+            border-radius: var(--radius-base);
+            margin-bottom: var(--spacing-6);
+            display: none;
+        }
+
+        .alert-success.show {
+            display: block;
+        }
+
+        .alert-error {
+            background-color: rgba(198, 40, 40, 0.1);
+            border-left: var(--border-width-4) solid var(--color-error);
+            color: var(--color-error-dark);
+            padding: var(--spacing-4);
+            border-radius: var(--radius-base);
+            margin-bottom: var(--spacing-6);
+            display: none;
+        }
+
+        .alert-error.show {
+            display: block;
+        }
+
+        .required-note {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .required-note .required-indicator {
+            color: var(--color-error);
+            font-weight: var(--font-weight-bold);
+        }
+    </style>
+</head>
+<body>
+    <!-- Crisis Alert Banner -->
+    <div id="crisis-banner" class="crisis-banner" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="container">
+            <span class="crisis-icon">⚠️</span>
+            <strong>SNAP Benefit Alert:</strong> November 2025 benefits delayed due to federal shutdown.
+            <a href="/crisis" class="crisis-link">Get immediate help →</a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav-brand">
+                    <h1>KC Food Security Hub</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="/resources">Resources</a></li>
+                    <li><a href="/data">Data</a></li>
+                    <li><a href="/faq">FAQ</a></li>
+                    <li><a href="/get-involved">Get Involved</a></li>
+                    <li><a href="/es/" class="lang-switch">Español</a></li>
+                </ul>
+                <button class="nav-toggle" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Submit a Community Resource</h1>
+            <p class="page-subtitle">Help us expand our database of resources serving Kansas City metro residents</p>
+        </div>
+    </section>
+
+    <!-- Main Form -->
+    <main class="form-container">
+        <!-- Success Message -->
+        <div id="success-message" class="alert-success" role="alert">
+            <strong>✓ Thank you!</strong> Your submission has been received and will be reviewed shortly.
+        </div>
+
+        <!-- Error Message -->
+        <div id="error-message" class="alert-error" role="alert">
+            <strong>✗ Error:</strong> <span id="error-text">There was a problem submitting your form. Please try again or contact us directly.</span>
+        </div>
+
+        <!-- Introduction -->
+        <div class="form-section">
+            <h2 class="form-section-title">Resource Information</h2>
+            <p>Thank you for helping us maintain an up-to-date directory of community resources. All submissions will be reviewed before being added to our database.</p>
+            <p class="required-note"><span class="required-indicator">*</span> Required fields</p>
+        </div>
+
+        <!-- Form -->
+        <form id="resource-form" novalidate>
+            <!-- Basic Information -->
+            <div class="form-section">
+                <h3 class="form-section-title">Basic Information</h3>
+
+                <div class="form-group">
+                    <label for="org-name" class="form-label form-label-required">Organization Name</label>
+                    <input
+                        type="text"
+                        id="org-name"
+                        name="orgName"
+                        class="form-input"
+                        required
+                        aria-required="true"
+                        aria-describedby="org-name-error"
+                    >
+                    <span id="org-name-error" class="form-error" role="alert"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="category" class="form-label form-label-required">Resource Category</label>
+                    <select
+                        id="category"
+                        name="category"
+                        class="form-select"
+                        required
+                        aria-required="true"
+                        aria-describedby="category-error"
+                    >
+                        <option value="">Select a category...</option>
+                        <option value="Food Assistance">Food Assistance</option>
+                        <option value="Housing Aid">Housing Aid</option>
+                        <option value="Utility Assistance">Utility Assistance</option>
+                        <option value="Mental Health">Mental Health</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Financial Support">Financial Support</option>
+                    </select>
+                    <span id="category-error" class="form-error" role="alert"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="description" class="form-label form-label-required">Description</label>
+                    <textarea
+                        id="description"
+                        name="description"
+                        class="form-textarea"
+                        rows="4"
+                        placeholder="Brief description of services offered"
+                        required
+                        aria-required="true"
+                        aria-describedby="description-error"
+                    ></textarea>
+                    <span id="description-error" class="form-error" role="alert"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="services" class="form-label form-label-required">Services Provided</label>
+                    <textarea
+                        id="services"
+                        name="services"
+                        class="form-textarea"
+                        rows="3"
+                        placeholder="List main services, separated by commas (e.g., Food pantry, SNAP assistance, Nutrition education)"
+                        required
+                        aria-required="true"
+                        aria-describedby="services-error"
+                    ></textarea>
+                    <span class="form-help">Separate each service with a comma</span>
+                    <span id="services-error" class="form-error" role="alert"></span>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="form-section">
+                <h3 class="form-section-title">Contact Information</h3>
+
+                <div class="form-row form-row-2col">
+                    <div class="form-group">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            class="form-input"
+                            placeholder="(816) 555-1234"
+                            pattern="\(\d{3}\) \d{3}-\d{4}"
+                            aria-describedby="phone-error phone-help"
+                        >
+                        <span id="phone-help" class="form-help">Format: (XXX) XXX-XXXX</span>
+                        <span id="phone-error" class="form-error" role="alert"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-input"
+                            placeholder="contact@example.org"
+                            aria-describedby="email-error"
+                        >
+                        <span id="email-error" class="form-error" role="alert"></span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="website" class="form-label">Website</label>
+                    <input
+                        type="url"
+                        id="website"
+                        name="website"
+                        class="form-input"
+                        placeholder="https://example.org"
+                        aria-describedby="website-error"
+                    >
+                    <span id="website-error" class="form-error" role="alert"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="hours" class="form-label">Hours of Operation</label>
+                    <input
+                        type="text"
+                        id="hours"
+                        name="hours"
+                        class="form-input"
+                        placeholder="Mon-Fri 9AM-5PM"
+                        aria-describedby="hours-help"
+                    >
+                    <span id="hours-help" class="form-help">Example: Monday-Friday 9:00 AM - 5:00 PM</span>
+                </div>
+            </div>
+
+            <!-- Location Information -->
+            <div class="form-section">
+                <h3 class="form-section-title">Location</h3>
+
+                <div class="form-group">
+                    <label for="address" class="form-label">Street Address</label>
+                    <input
+                        type="text"
+                        id="address"
+                        name="address"
+                        class="form-input"
+                        placeholder="123 Main Street"
+                        aria-describedby="address-help"
+                    >
+                    <span id="address-help" class="form-help">Leave blank if no physical location</span>
+                </div>
+
+                <div class="form-row form-row-3col">
+                    <div class="form-group">
+                        <label for="city" class="form-label form-label-required">City</label>
+                        <input
+                            type="text"
+                            id="city"
+                            name="city"
+                            class="form-input"
+                            placeholder="Kansas City"
+                            required
+                            aria-required="true"
+                            aria-describedby="city-error"
+                        >
+                        <span id="city-error" class="form-error" role="alert"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="state" class="form-label form-label-required">State</label>
+                        <select
+                            id="state"
+                            name="state"
+                            class="form-select"
+                            required
+                            aria-required="true"
+                            aria-describedby="state-error"
+                        >
+                            <option value="">Select...</option>
+                            <option value="MO">MO</option>
+                            <option value="KS">KS</option>
+                        </select>
+                        <span id="state-error" class="form-error" role="alert"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="zip" class="form-label form-label-required">ZIP Code</label>
+                        <input
+                            type="text"
+                            id="zip"
+                            name="zip"
+                            class="form-input"
+                            placeholder="64106"
+                            pattern="\d{5}"
+                            maxlength="5"
+                            required
+                            aria-required="true"
+                            aria-describedby="zip-error"
+                        >
+                        <span id="zip-error" class="form-error" role="alert"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Information -->
+            <div class="form-section">
+                <h3 class="form-section-title">Additional Information</h3>
+
+                <div class="form-group">
+                    <label for="referral" class="form-label">How did you hear about us?</label>
+                    <input
+                        type="text"
+                        id="referral"
+                        name="referral"
+                        class="form-input"
+                        placeholder="Search engine, social media, referral, etc."
+                    >
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="form-section">
+                <button type="submit" id="submit-btn" class="submit-btn">
+                    <span id="submit-text">Submit Resource</span>
+                    <span id="submit-spinner" class="spinner" style="display: none;"></span>
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>About This Site</h4>
+                    <p>A community resource providing verified, up-to-date information on food security and assistance programs in the Kansas City metro area.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="/resources">Find Resources</a></li>
+                        <li><a href="/data">Explore Data</a></li>
+                        <li><a href="/eligibility">Check Eligibility</a></li>
+                        <li><a href="/crisis">Crisis Information</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Emergency Contacts</h4>
+                    <ul>
+                        <li>📞 United Way 211: <a href="tel:211">Dial 211</a></li>
+                        <li>🆘 Crisis Line: <a href="tel:988">Dial 988</a></li>
+                        <li>🍎 Harvesters: <a href="tel:8776539519">877-653-9519</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Stay Informed</h4>
+                    <ul>
+                        <li><a href="/about">About & Methodology</a></li>
+                        <li><a href="/privacy">Privacy Policy</a></li>
+                        <li><a href="https://github.com/PatientVibes/ginahoangmoore.com" target="_blank" rel="noopener">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 GinaHoangMoore.com | Data updated: <span id="last-updated">November 5, 2025</span></p>
+                <p class="disclaimer">Information provided for educational and informational purposes. Always verify with official agencies.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Form Validation & Submission Script -->
+    <script>
+        // Phone number formatting
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length > 0) {
+                if (value.length <= 3) {
+                    value = `(${value}`;
+                } else if (value.length <= 6) {
+                    value = `(${value.slice(0, 3)}) ${value.slice(3)}`;
+                } else {
+                    value = `(${value.slice(0, 3)}) ${value.slice(3, 6)}-${value.slice(6, 10)}`;
+                }
+            }
+            e.target.value = value;
+        });
+
+        // Form validation functions
+        function validateRequired(input) {
+            if (!input.value.trim()) {
+                showError(input, 'This field is required');
+                return false;
+            }
+            clearError(input);
+            return true;
+        }
+
+        function validateEmail(input) {
+            if (input.value && !input.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+                showError(input, 'Please enter a valid email address');
+                return false;
+            }
+            clearError(input);
+            return true;
+        }
+
+        function validatePhone(input) {
+            if (input.value && !input.value.match(/^\(\d{3}\) \d{3}-\d{4}$/)) {
+                showError(input, 'Please enter a valid phone number: (XXX) XXX-XXXX');
+                return false;
+            }
+            clearError(input);
+            return true;
+        }
+
+        function validateZip(input) {
+            if (!input.value.match(/^\d{5}$/)) {
+                showError(input, 'ZIP code must be 5 digits');
+                return false;
+            }
+            clearError(input);
+            return true;
+        }
+
+        function validateUrl(input) {
+            if (input.value && !input.value.match(/^https?:\/\/.+/)) {
+                showError(input, 'Please enter a valid URL starting with http:// or https://');
+                return false;
+            }
+            clearError(input);
+            return true;
+        }
+
+        function showError(input, message) {
+            const errorElement = document.getElementById(`${input.id}-error`);
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+            input.classList.add('form-input-error');
+            input.setAttribute('aria-invalid', 'true');
+        }
+
+        function clearError(input) {
+            const errorElement = document.getElementById(`${input.id}-error`);
+            if (errorElement) {
+                errorElement.textContent = '';
+                errorElement.style.display = 'none';
+            }
+            input.classList.remove('form-input-error');
+            input.removeAttribute('aria-invalid');
+        }
+
+        // Real-time validation on blur
+        document.getElementById('org-name').addEventListener('blur', function() {
+            validateRequired(this);
+        });
+
+        document.getElementById('category').addEventListener('blur', function() {
+            validateRequired(this);
+        });
+
+        document.getElementById('description').addEventListener('blur', function() {
+            validateRequired(this);
+        });
+
+        document.getElementById('services').addEventListener('blur', function() {
+            validateRequired(this);
+        });
+
+        document.getElementById('email').addEventListener('blur', function() {
+            validateEmail(this);
+        });
+
+        document.getElementById('phone').addEventListener('blur', function() {
+            validatePhone(this);
+        });
+
+        document.getElementById('website').addEventListener('blur', function() {
+            validateUrl(this);
+        });
+
+        document.getElementById('city').addEventListener('blur', function() {
+            validateRequired(this);
+        });
+
+        document.getElementById('state').addEventListener('blur', function() {
+            validateRequired(this);
+        });
+
+        document.getElementById('zip').addEventListener('blur', function() {
+            if (this.value) {
+                validateZip(this);
+            } else {
+                validateRequired(this);
+            }
+        });
+
+        // Form submission
+        document.getElementById('resource-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Hide previous messages
+            document.getElementById('success-message').classList.remove('show');
+            document.getElementById('error-message').classList.remove('show');
+
+            // Validate all required fields
+            const orgName = document.getElementById('org-name');
+            const category = document.getElementById('category');
+            const description = document.getElementById('description');
+            const services = document.getElementById('services');
+            const email = document.getElementById('email');
+            const phone = document.getElementById('phone');
+            const website = document.getElementById('website');
+            const city = document.getElementById('city');
+            const state = document.getElementById('state');
+            const zip = document.getElementById('zip');
+
+            let isValid = true;
+
+            // Required fields
+            isValid = validateRequired(orgName) && isValid;
+            isValid = validateRequired(category) && isValid;
+            isValid = validateRequired(description) && isValid;
+            isValid = validateRequired(services) && isValid;
+            isValid = validateRequired(city) && isValid;
+            isValid = validateRequired(state) && isValid;
+            isValid = validateRequired(zip) && isValid;
+
+            // Optional fields with format validation
+            if (email.value) {
+                isValid = validateEmail(email) && isValid;
+            }
+            if (phone.value) {
+                isValid = validatePhone(phone) && isValid;
+            }
+            if (website.value) {
+                isValid = validateUrl(website) && isValid;
+            }
+
+            // ZIP format
+            if (zip.value) {
+                isValid = validateZip(zip) && isValid;
+            }
+
+            if (!isValid) {
+                // Scroll to first error
+                const firstError = document.querySelector('.form-input-error, .form-select-error, .form-textarea-error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    firstError.focus();
+                }
+                return;
+            }
+
+            // Collect form data
+            const formData = {
+                orgName: orgName.value.trim(),
+                category: category.value,
+                description: description.value.trim(),
+                services: services.value.trim(),
+                phone: phone.value,
+                email: email.value.trim(),
+                website: website.value.trim(),
+                address: document.getElementById('address').value.trim(),
+                city: city.value.trim(),
+                state: state.value,
+                zip: zip.value.trim(),
+                hours: document.getElementById('hours').value.trim(),
+                referral: document.getElementById('referral').value.trim(),
+                submittedAt: new Date().toISOString()
+            };
+
+            // Show loading state
+            const submitBtn = document.getElementById('submit-btn');
+            const submitText = document.getElementById('submit-text');
+            const submitSpinner = document.getElementById('submit-spinner');
+
+            submitBtn.disabled = true;
+            submitText.textContent = 'Submitting...';
+            submitSpinner.style.display = 'inline-block';
+
+            try {
+                // Submit to API
+                const response = await fetch('/api/submit-resource', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    // Success
+                    document.getElementById('success-message').classList.add('show');
+                    document.getElementById('resource-form').reset();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    // Server error
+                    throw new Error('Server returned an error');
+                }
+            } catch (error) {
+                // Network or other error
+                console.error('Form submission error:', error);
+                document.getElementById('error-text').textContent =
+                    'There was a problem submitting your form. Please try again or contact us directly at chris.paul.moore@gmail.com';
+                document.getElementById('error-message').classList.add('show');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                submitText.textContent = 'Submit Resource';
+                submitSpinner.style.display = 'none';
+            }
+        });
+
+        // Mobile navigation toggle
+        document.querySelector('.nav-toggle')?.addEventListener('click', function() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
