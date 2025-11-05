@@ -73,6 +73,8 @@
     <link rel="stylesheet" href="/css/components.css">
     <link rel="stylesheet" href="/css/style.css">
 
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <!-- Cloudflare Web Analytics -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ef5b341a90de40ae9bfff903ffb7d1b5"}'></script>
 </head>
@@ -327,9 +329,11 @@
                     <a href="/data" class="btn btn-outline">Explore Full Data →</a>
                 </div>
                 <div class="data-visual">
-                    <div class="placeholder-chart">
-                        <p>📈 Interactive charts and maps coming soon</p>
-                        <p class="placeholder-note">County-level SNAP participation, food insecurity trends, and demographic breakdowns</p>
+                    <div class="placeholder-chart" style="display: flex; flex-direction: column; align-items: center; justify-content: center; padding: var(--spacing-xl);">
+                        <canvas id="previewChart" style="max-width: 500px; max-height: 300px;"></canvas>
+                        <p style="margin-top: var(--spacing-md); color: var(--color-text-secondary); text-align: center;">
+                            Interactive Data Dashboard Available
+                        </p>
                     </div>
                 </div>
             </div>
@@ -432,6 +436,52 @@
                 alert('Please enter a valid 5-digit ZIP code');
             }
         });
+
+        // Preview Chart - Food Insecurity Rates by County
+        fetch('/data/kc-food-security-data.json')
+            .then(response => response.json())
+            .then(data => {
+                const ctx = document.getElementById('previewChart');
+                if (ctx) {
+                    new Chart(ctx.getContext('2d'), {
+                        type: 'bar',
+                        data: {
+                            labels: data.food_insecurity.by_county_2024.map(c => c.county.replace(', MO', '').replace(', KS', '')),
+                            datasets: [{
+                                label: 'Food Insecurity Rate (%)',
+                                data: data.food_insecurity.by_county_2024.map(c => c.overall_rate),
+                                backgroundColor: ['#3182ce', '#805ad5', '#38a169', '#d69e2e', '#e53e3e']
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: true,
+                            plugins: {
+                                legend: { display: false },
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return context.parsed.y + '% food insecure';
+                                        }
+                                    }
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    max: 20,
+                                    ticks: {
+                                        callback: function(value) {
+                                            return value + '%';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            })
+            .catch(error => console.error('Error loading preview chart:', error));
     </script>
 </body>
 </html>
