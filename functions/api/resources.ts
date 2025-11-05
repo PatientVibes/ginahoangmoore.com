@@ -57,13 +57,28 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
             .bind(...params)
             .all();
 
-        // Parse JSON fields
-        const resources = results.map((r: any) => ({
-            ...r,
-            hours_of_operation: r.hours_of_operation ? JSON.parse(r.hours_of_operation) : null,
-            services_provided: r.services_provided ? JSON.parse(r.services_provided) : null,
-            languages_spoken: r.languages_spoken ? JSON.parse(r.languages_spoken) : null,
-        }));
+        // Parse JSON fields (handle both JSON and plain text formats)
+        const resources = results.map((r: any) => {
+            const parseField = (field: any) => {
+                if (!field) return null;
+                if (typeof field === 'string') {
+                    // Try to parse as JSON, if it fails, return as-is
+                    try {
+                        return JSON.parse(field);
+                    } catch {
+                        return field;
+                    }
+                }
+                return field;
+            };
+
+            return {
+                ...r,
+                hours_of_operation: parseField(r.hours_of_operation),
+                services_provided: parseField(r.services_provided),
+                languages_spoken: parseField(r.languages_spoken),
+            };
+        });
 
         return new Response(JSON.stringify({
             success: true,
