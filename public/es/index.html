@@ -311,8 +311,8 @@
             const zip = zipInput.value.trim();
 
             if (zip && /^\d{5}$/.test(zip)) {
-                // Redirect to API with Spanish language parameter
-                window.location.href = '/api/resources?zip=' + zip + '&lang=es';
+                // Redirect to search results page
+                window.location.href = '/resources/search?zip=' + zip;
             } else {
                 alert('Por favor ingrese un código postal válido de 5 dígitos');
             }

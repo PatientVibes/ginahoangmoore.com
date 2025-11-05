@@ -425,17 +425,23 @@
 
     <!-- ZIP Code Search Handler -->
     <script>
-        document.getElementById('zipSearch').addEventListener('submit', function(e) {
+        // Handle both ZIP search forms
+        function handleZipSearch(e) {
             e.preventDefault();
-            const zip = document.getElementById('zipInput').value.trim();
+            const form = e.target;
+            const zipInput = form.querySelector('input[name="zip"]');
+            const zip = zipInput.value.trim();
 
             if (zip && /^\d{5}$/.test(zip)) {
-                // Redirect to API test for now (will create search page next)
-                window.location.href = '/api/resources?zip=' + zip;
+                // Redirect to search results page
+                window.location.href = '/resources/search?zip=' + zip;
             } else {
                 alert('Please enter a valid 5-digit ZIP code');
             }
-        });
+        }
+
+        document.getElementById('zipSearch').addEventListener('submit', handleZipSearch);
+        document.getElementById('zip-search-form').addEventListener('submit', handleZipSearch);
 
         // Preview Chart - Food Insecurity Rates by County
         fetch('/data/kc-food-security-data.json')
