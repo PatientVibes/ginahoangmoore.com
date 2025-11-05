@@ -29,15 +29,15 @@ async function loadCategoryResources(category) {
             throw new Error('No resources found');
         }
 
-        loading.style.display = 'none';
-        resourcesContainer.style.display = 'grid';
+        if (loading) loading.style.display = 'none';
+        if (resourcesContainer) resourcesContainer.style.display = 'grid';
 
         resourcesContainer.innerHTML = data.map(resource => renderResource(resource, category)).join('');
 
     } catch (error) {
         console.error('Error loading resources:', error);
-        loading.style.display = 'none';
-        errorContainer.style.display = 'block';
+        if (loading) loading.style.display = 'none';
+        if (errorContainer) errorContainer.style.display = 'block';
     }
 }
 
