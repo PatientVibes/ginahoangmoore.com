@@ -368,7 +368,10 @@
 
                         ${resource.services_provided ? `
                             <div class="services-list">
-                                ${resource.services_provided.map(service => `
+                                ${(typeof resource.services_provided === 'string'
+                                    ? resource.services_provided.split(',').map(s => s.trim())
+                                    : resource.services_provided
+                                ).map(service => `
                                     <span class="service-tag">${service}</span>
                                 `).join('')}
                             </div>

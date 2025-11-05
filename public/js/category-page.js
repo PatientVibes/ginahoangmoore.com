@@ -102,7 +102,10 @@ function renderResource(resource, category) {
 
             ${resource.services_provided && resource.services_provided.length ? `
                 <div class="services-list">
-                    ${resource.services_provided.map(service => `
+                    ${(typeof resource.services_provided === 'string'
+                        ? resource.services_provided.split(',').map(s => s.trim())
+                        : resource.services_provided
+                    ).map(service => `
                         <span class="service-tag">${escapeHtml(service)}</span>
                     `).join('')}
                 </div>
