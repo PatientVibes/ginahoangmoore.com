@@ -7,6 +7,7 @@
 
 interface Env {
     DB: D1Database;
+    SEND_EMAIL: any;
 }
 
 interface SubmissionData {
@@ -178,7 +179,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         };
 
         // Insert into database
-        await env.DB.prepare(`
+        const result = await env.DB.prepare(`
             INSERT INTO resource_submissions (
                 name, category_id, description,
                 phone, email, website,
@@ -201,6 +202,14 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
             sanitizedData.services_provided,
             sanitizedData.data_source
         ).run();
+
+        // Send email notification
+        try {
+            await sendEmailNotification(env, sanitizedData);
+        } catch (emailError) {
+            console.error('Failed to send email notification:', emailError);
+            // Don't fail the request if email fails - submission was successful
+        }
 
         // Success response
         return new Response(JSON.stringify({
@@ -231,6 +240,52 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         });
     }
 };
+
+/**
+ * Send email notification about new submission
+ */
+async function sendEmailNotification(env: Env, data: any): Promise<void> {
+    const categoryNames: { [key: number]: string } = {
+        1: 'Food Assistance',
+        2: 'Utility Assistance',
+        3: 'Housing Aid',
+        4: 'Mental Health',
+        5: 'Financial Support',
+        6: 'Healthcare'
+    };
+
+    const emailContent = `
+New Resource Submission - KC Food Security Hub
+
+Organization: ${data.name}
+Category: ${categoryNames[data.category_id] || 'Unknown'}
+City: ${data.city}, ${data.state} ${data.zip}
+
+Description:
+${data.description}
+
+Services Provided:
+${data.services_provided}
+
+Contact Information:
+${data.phone ? `Phone: ${data.phone}` : ''}
+${data.email ? `Email: ${data.email}` : ''}
+${data.website ? `Website: ${data.website}` : ''}
+
+${data.address ? `Address: ${data.address}, ${data.city}, ${data.state} ${data.zip}` : ''}
+${data.hours_of_operation ? `Hours: ${data.hours_of_operation}` : ''}
+${data.data_source ? `Source: ${data.data_source}` : ''}
+
+Review this submission at: https://ginahoangmoore.com/admin/review-submissions.html
+    `.trim();
+
+    await env.SEND_EMAIL.send({
+        from: 'submissions@ginahoangmoore.com',
+        to: 'gina.pacis.moore@gmail.com',
+        subject: `New Resource Submission: ${data.name}`,
+        text: emailContent
+    });
+}
 
 /**
  * OPTIONS handler for CORS preflight
