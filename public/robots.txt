@@ -1,0 +1,10 @@
+# robots.txt for ginahoangmoore.com
+
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://ginahoangmoore.com/sitemap.xml
+
+# Crawl delay (be nice to resources)
+Crawl-delay: 1

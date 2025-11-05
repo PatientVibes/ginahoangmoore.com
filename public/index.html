@@ -3,8 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Kansas City Metro SNAP & Food Security Resource Platform - Find immediate assistance, explore data, and connect with community resources.">
-    <title>KC Metro Food Security Resources | GinaHoangMoore.com</title>
+    <meta name="description" content="Find immediate food assistance, SNAP benefits, housing help, and mental health resources in Kansas City metro. Free 24/7 access to verified resources for Jackson, Clay, Platte, Johnson, and Wyandotte counties.">
+    <title>KC Metro Food Security Resources | Free SNAP & Assistance Help</title>
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ginahoangmoore.com/">
+    <meta property="og:title" content="KC Metro Food Security Resources | Free SNAP & Assistance Help">
+    <meta property="og:description" content="Find immediate food assistance, SNAP benefits, housing help, and mental health resources in Kansas City metro. Free 24/7 access to verified resources.">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KC Metro Food Security Resources">
+    <meta name="twitter:description" content="Find immediate food assistance, SNAP benefits, housing help, and mental health resources in Kansas City metro.">
+
+    <!-- Structured Data - Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "GovernmentOrganization",
+      "name": "KC Food Security Hub",
+      "description": "Kansas City metro food security resource platform providing SNAP assistance, food pantry locations, housing help, and mental health resources",
+      "url": "https://ginahoangmoore.com",
+      "areaServed": {
+        "@type": "State",
+        "name": "Missouri and Kansas"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "211",
+        "contactType": "Emergency Services",
+        "areaServed": "Kansas City Metro",
+        "availableLanguage": ["English", "Spanish"]
+      },
+      "serviceArea": {
+        "@type": "GeoCircle",
+        "geoMidpoint": {
+          "@type": "GeoCoordinates",
+          "latitude": "39.0997",
+          "longitude": "-94.5786"
+        },
+        "geoRadius": "50000"
+      }
+    }
+    </script>
+
+    <!-- Structured Data - WebSite with Search Action -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "KC Food Security Hub",
+      "url": "https://ginahoangmoore.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://ginahoangmoore.com/resources?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
     <link rel="stylesheet" href="/css/tokens.css">
     <link rel="stylesheet" href="/css/components.css">
     <link rel="stylesheet" href="/css/style.css">
